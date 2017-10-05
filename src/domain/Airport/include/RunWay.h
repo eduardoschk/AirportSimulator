@@ -5,21 +5,24 @@
 
 #include "Direction.h"
 
+class MyTimer;
+
 class RunWay
 {
 private:
    Direction::DIRECTIONS directionRunWay;
-   bool landingAvaible;
+   long invalidLandingRunWayStartTime;
+
+   MyTimer* timer;
+
 public:
    ~RunWay() {}
    RunWay(Direction::DIRECTIONS _directionRunWay);
 
-   bool isAvaible() { return landingAvaible; }
+   bool isAvaible();
    Direction::DIRECTIONS getDirectionRunWay() { return directionRunWay; }
    void runwayInUse();
 
-protected:
-   void outroTeste();
 };
 
 #endif

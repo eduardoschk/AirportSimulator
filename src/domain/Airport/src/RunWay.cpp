@@ -1,16 +1,19 @@
-#include "RunWay.h"
-#include "Cronometro.h"
 #include <iostream>
-#include "CallBack.h"
+#include "MyTimer.h"
+#include "RunWay.h"
 
-RunWay::RunWay(Direction::DIRECTIONS _directionRunWay) : directionRunWay(_directionRunWay), landingAvaible(true) {}
+RunWay::RunWay(Direction::DIRECTIONS _directionRunWay) : directionRunWay(_directionRunWay), invalidLandingRunWayStartTime(-1), timer(MyTimer::getTimer()) {}
 
 void RunWay::runwayInUse() {
-   landingAvaible= false;
-   CallBack<RunWay>* cron= new CallBack<RunWay>(this, &RunWay::outroTeste);
-   Cronometro(cron).run(5);
+   invalidLandingRunWayStartTime= timer->getActualTime();
 }
 
-void RunWay::outroTeste() {
-   std::cout << "Outro teste" << std::endl;
+bool RunWay::isAvaible() {
+   if (invalidLandingRunWayStartTime < 0)
+      return true;
+   else if (timer->differenceBetweenActualTimeInSeconds(invalidLandingRunWayStartTime) >= 3) {
+      invalidLandingRunWayStartTime= -1;
+      return true;
+   } else 
+      return false;
 }

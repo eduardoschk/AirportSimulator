@@ -1,25 +1,23 @@
 #pragma once
 
-#ifndef AIRPLANE_H
-#define AIRPLANE_H
+#include <string>
 
 class Airport;
 
-class Airplane
+class Airplane 
 {
-private: 
+private:
+   std::string name;
    Airport* airport;
-   int timeRequest;
-   char* name;
+   long landingTime;
 
 public:
-   Airplane(char* _name);
-   ~Airplane() {}
+   Airplane(std::string _name);
+   ~Airplane();
 
-   void requestLanding();
-   int getTimeFirstRequest() { return timeRequest; }
-   void liberadoPistaParaDecolar();
-   void liberadoPistaParaPousar();
+   std::string getName();
+
+   void requestLandingToAirport();
+
+   void landingStripFree();
 };
-
-#endif

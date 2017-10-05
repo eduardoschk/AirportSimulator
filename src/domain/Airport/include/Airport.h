@@ -4,23 +4,27 @@
 #define AIRPORT_H
 
 #include <exception>
-#include <queue>
+#include "Airplane.h"
 #include "WindMonitoring.h"
 #include "Direction.h"
 #include "RunWay.h"
-#include "Requisicao.h"
+#include <queue>
+#include "Request.h"
 
 class Airplane;
 
 class Airport 
 {
 private: 
-   int limitOfAirplanesInLanding;
    WindMonitoring* windMonitoring;
-   RunWay* runWays[3];
-   std::queue<Requisicao> filaRequisicoes;
 
+   std::queue<Request*> requests;
+   RunWay* runWays[3];
+
+   bool existsRunWayAvaible();
    RunWay* getRunWayAvaible();
+   bool runWaysIsAvaible(RunWay* runWay);
+   
 
 protected:
    Airport();
@@ -30,16 +34,10 @@ public:
    static Airport* getInstance();
    static void resetInstance();
 
-   class ClosedAirport : public std::exception { virtual const char* what() const { return "Aeroporto fechado"; } };
-   class NoRunWaysAvaible : public std::exception { virtual const char* what() const { return "Sem pista de pouso liberada"; } };
-
-   int getLimitOfAirplanesInLanding();
-   void requisitaPistaParaPousar(Airplane& air);
-   void setLimitOfAirplanesInLanding(int limit) { limitOfAirplanesInLanding= limit; }
-   bool runWaysIsAvaible(RunWay* runWay);
-   bool isOpenToUsingLanding();
-   bool existsRunWayAvaible();
-   void tratarRequisicoes();
+   /*class ClosedAirport : public std::exception { virtual const char* what() const { return "Aeroporto fechado"; } };
+   class NoRunWaysAvaible : public std::exception { virtual const char* what() const { return "Sem pista de pouso liberada"; } };*/
+   void requestUseAirport(Airplane* _airplane);
+   void verifyRequests();
 
 };
 

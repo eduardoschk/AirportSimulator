@@ -10,7 +10,7 @@ public:
    Wind() {}
    ~Wind() {}
 
-   virtual Direction::DIRECTIONS getDirectionWind()= 0;
+   virtual Direction::DIRECTIONS getDirectionWind() = 0;
 };
 
 class SouthWind : public Wind {

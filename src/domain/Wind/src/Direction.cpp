@@ -15,4 +15,18 @@ bool Direction::areTransversesDirections(Direction::DIRECTIONS directionOne, Dir
    case SOUTHEAST:
       return directionTwo != Direction::NORTHWEST && directionTwo != Direction::SOUTHEAST;
    }
+   return false;
+}
+
+std::string Direction::toString(DIRECTIONS direction) {
+   switch (direction) {
+   case SOUTH:       return "Sul";
+   case NORTH:       return "Norte";   
+   case WEST:        return "Oeste";
+   case EAST:        return "Lest";
+   case NORTHEAST:   return "Nordeste";
+   case SOUTHWEST:   return "Sudoeste";
+   case NORTHWEST:   return "Noroeste";
+   case SOUTHEAST:   return "Sudeste";
+   }
 }

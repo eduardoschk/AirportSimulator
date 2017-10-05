@@ -1,43 +1,15 @@
 #include "Airport.h"
-#include "Airplane.h"
+#include <iostream>
+#include "Direction.h"
 
-static Airport* instance = nullptr;
-
-Airport::Airport() : limitOfAirplanesInLanding(0), windMonitoring(WindMonitoring::getInstance())
+Airport::Airport() : windMonitoring(WindMonitoring::getInstance())
 {
    runWays[0]= new RunWay(Direction::SOUTH);
    runWays[1]= new RunWay(Direction::WEST);
    runWays[2]= new RunWay(Direction::SOUTHEAST);
 }
 
-void Airport::requisitaPistaParaPousar(Airplane& air) {
-   try {
-      if (isOpenToUsingLanding()) {
-         filaRequisicoes.push(Requisicao(&air, Requisicao::POUSO));
-         if (existsRunWayAvaible())
-            tratarRequisicoes();
-      } else 
-         throw ClosedAirport();
-   } catch (NoRunWaysAvaible) {
-   }
-}
-
-void Airport::tratarRequisicoes() {
-   if ( !filaRequisicoes.empty() ) {
-      Requisicao req= filaRequisicoes.front();
-      filaRequisicoes.pop();
-      RunWay* runWay= getRunWayAvaible();
-      runWay->runwayInUse();
-      switch (req.getTypeRequest() ) {
-      case Requisicao::POUSO:
-         req.getAirplane()->liberadoPistaParaPousar();
-         break;
-      case Requisicao::DECOLAR:
-         req.getAirplane()->liberadoPistaParaDecolar();
-         break;
-      }
-   }
-}
+///////////////////////////////////////////////////////////////////////////////
 
 bool Airport::existsRunWayAvaible() {
    RunWay* runWay = getRunWayAvaible();
@@ -47,20 +19,12 @@ bool Airport::existsRunWayAvaible() {
       return false;
 }
 
-bool Airport::isOpenToUsingLanding() {
-   return getLimitOfAirplanesInLanding() > 0;
-}
-
-int Airport::getLimitOfAirplanesInLanding() { 
-   return limitOfAirplanesInLanding;
-}
-
 RunWay* Airport::getRunWayAvaible() {
    for (int i= 0 ; i < 3 ; i++ ) {
       if (runWaysIsAvaible(runWays[i]))
          return runWays[i];
    }
-   throw NoRunWaysAvaible();
+   return nullptr;
 }
 
 bool Airport::runWaysIsAvaible(RunWay* runWay) {
@@ -70,6 +34,31 @@ bool Airport::runWaysIsAvaible(RunWay* runWay) {
    }
    return false;
 }
+
+void Airport::requestUseAirport(Airplane* _airplane) {
+   std::cout << "Requisicao recebida" << std::endl;
+   Request* request= new LandingRequest(_airplane);
+   requests.push(request);
+   verifyRequests();
+}
+
+void Airport::verifyRequests() {
+   if (!requests.empty()) {
+      if (existsRunWayAvaible()) {
+         Request* req= requests.front();
+         RunWay* runWay= getRunWayAvaible();
+         runWay->runwayInUse();
+         requests.pop();
+         std::cout << req->getAirplane()->getName() << " pousando na pista " << Direction::toString(runWay->getDirectionRunWay()) << std::endl;
+      }
+   }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+///// Singleton ///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+static Airport* instance = nullptr;
 
 Airport* Airport::getInstance() {
    if (!instance)
