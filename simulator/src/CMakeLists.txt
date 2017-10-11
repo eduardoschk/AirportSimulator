@@ -1,0 +1,6 @@
+add_subdirectory(domain)
+add_subdirectory(util)
+add_subdirectory(observer)
+if(NOT ${BuildTests})
+	add_subdirectory(app)
+endif()

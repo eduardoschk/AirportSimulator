@@ -1,0 +1,6 @@
+if (${BuildTests})
+	add_subdirectory(libraries)
+	add_subdirectory(test)
+endif()
+message(STATUS "Build for tests: ${BuildTests}")
+add_subdirectory(src)
