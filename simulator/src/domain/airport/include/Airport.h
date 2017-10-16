@@ -18,6 +18,8 @@ private:
    RunWay* getRunWayAvailable();
    bool runWaysIsAvaible(RunWay* runWay);
 
+   static Airport* instance;
+
    Airport();
 
 public:

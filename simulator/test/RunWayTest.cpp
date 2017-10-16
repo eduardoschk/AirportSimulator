@@ -5,7 +5,9 @@
 #include "Direction.h"
 #include "MyTimer.h"
 
-class RunWayTest : public testing::Test {
+class RunWayTest : 
+   public testing::Test 
+{
 protected:
    RunWay* runWay;
    MyTimer* timer;
@@ -29,12 +31,12 @@ TEST_F(RunWayTest, IsUnavaibleRunWay) {
 
 TEST_F(RunWayTest, TimeUnavailable1Second) {
    runWay->runwayPutToUse();
-   timer->sleep(1);
+   timer->startStopwatch(1);
    ASSERT_FALSE(runWay->isAvailable());
 }
 
 TEST_F(RunWayTest, TimeUnavailable3Seconds) {
    runWay->runwayPutToUse();
-   timer->sleep(3);
+   timer->startStopwatch(3);
    ASSERT_TRUE(runWay->isAvailable());
 }

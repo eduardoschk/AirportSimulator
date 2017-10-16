@@ -26,11 +26,12 @@ private:
    void verifyRequests();
    bool verifyRequest(Request& request);
    bool resolveLandingRequest(LandingRequest& landingRequest);
-   bool resolveLandingTakeOff(TakeOffRequest& landingRequest);
+   bool resolveTakeOffRequest(TakeOffRequest& landingRequest);
    void requestResolved(Request& request);
    
-public:
    TowerOfControl();
+
+public:
    virtual ~TowerOfControl();
 
    void setLimitAirplanes(int limit);

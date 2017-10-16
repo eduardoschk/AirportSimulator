@@ -20,7 +20,7 @@ private:
    void calculateTimeToFreeRunWay();
 
 public:
-   ~RunWay() {}
+   ~RunWay();
    RunWay(const Direction::DIRECTIONS _directionRunWay);
 
    bool isAvailable();

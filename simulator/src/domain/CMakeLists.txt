@@ -1,23 +1,28 @@
-file(GLOB AIRPORT   "${CMAKE_CURRENT_SOURCE_DIR}/airport/src/*.cpp" 
-					"${CMAKE_CURRENT_SOURCE_DIR}/airport/include/*.h")
+ file(GLOB AIRPORT   "${CMAKE_CURRENT_SOURCE_DIR}/airport/src/*.cpp" 
+					 "${CMAKE_CURRENT_SOURCE_DIR}/airport/include/*.h")
 				  
-file(GLOB WIND  "${CMAKE_CURRENT_SOURCE_DIR}/wind/src/*.cpp" 
-			    "${CMAKE_CURRENT_SOURCE_DIR}/wind/include/*.h")
+ file(GLOB WIND  "${CMAKE_CURRENT_SOURCE_DIR}/wind/src/*.cpp" 
+			     "${CMAKE_CURRENT_SOURCE_DIR}/wind/include/*.h")
 
+ file(GLOB SIMULATOR  "${CMAKE_CURRENT_SOURCE_DIR}/simulator/src/*.cpp" 
+					  "${CMAKE_CURRENT_SOURCE_DIR}/simulator/include/*.h")
 				
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/airport/include")			
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/wind/include")
-include_directories("${PROJECT_SOURCE_DIR}/simulator/src/util")
-include_directories("${PROJECT_SOURCE_DIR}/simulator/src/observer")
+ include_directories("${CMAKE_SOURCE_DIR}/simulator/src/util")
+ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/simulator/include")
+ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/wind/include")
+ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/airport/include")
 				
-add_library(wind ${WIND})
-add_library(airport ${AIRPORT})
+ add_library(airport ${AIRPORT})
+ add_library(wind ${WIND})
 
-target_link_libraries (airport wind)
-target_link_libraries (airport observer)
-target_link_libraries (wind observer)
+ add_library(domain ${SIMULATOR})
 
-set_property(TARGET airport PROPERTY FOLDER "Airport")
-set_property(TARGET wind PROPERTY FOLDER "Airport")
+ target_link_libraries(domain util)
+ target_link_libraries(airport util)
+ target_link_libraries(wind util)
+ target_link_libraries(domain airport)
+ target_link_libraries(domain wind)
 
-
+ set_property(TARGET airport PROPERTY FOLDER "Domain")
+ set_property(TARGET wind PROPERTY FOLDER "Domain")
+ set_property(TARGET domain PROPERTY FOLDER "Domain")

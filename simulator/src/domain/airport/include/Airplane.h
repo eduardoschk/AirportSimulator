@@ -20,6 +20,8 @@ public:
    virtual ~Airplane();
 
    void requestLandingToAirport();
+   void requestTakeOffToAirport();
+
    void allowedLanding(long actualTime, long _timeToNextFlight);
    void changedAirport();
    
@@ -28,5 +30,11 @@ public:
    long getTimeLimitResponseLandingRequest();
    long getTimeAllowdLanding();
    long getTimeToNextFlight();
-   void requestTakeOffToAirport();
+
+   void setName(std::string newName);
+   void setCountPassengers(int newCountPassangers);
+   void setTimeLimitResponseLandingRequest(long newTimeLimitResponseLandingRequest);
+   void setTimeAllowdLanding(long newTimeAllowedLanding);
+   void setTimeToNextFlight(long newTimeToNextFlight);
+
 };

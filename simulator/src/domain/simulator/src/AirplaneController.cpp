@@ -14,6 +14,7 @@ AirplaneController::AirplaneController() : timer(MyTimer::getTimer()) {
 AirplaneController::~AirplaneController() {
    for (int i= 0 ; i < airplanes.size() ; i++)
       delete airplanes[i];
+   timer->remove(this);
 }
 
 

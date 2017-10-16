@@ -6,6 +6,10 @@ RunWay::RunWay(const Direction::DIRECTIONS _directionRunWay) : directionRunWay(_
    MyTimer::getTimer()->add(this);
 }
 
+RunWay::~RunWay() {
+   MyTimer::getTimer()->remove(this);
+}
+
 void RunWay::calculateTimeToFreeRunWay() {
    timeToFreeRunWay= MyTimer::getTimer()->getActualTime() + 3;
 }

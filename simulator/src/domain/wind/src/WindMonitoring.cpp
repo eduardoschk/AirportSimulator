@@ -13,6 +13,7 @@ WindMonitoring::WindMonitoring() : windFactory(new WindFactory()), actualWind(nu
 WindMonitoring::~WindMonitoring() {
    delete windFactory;
    delete actualWind;
+   instance= nullptr;
 }
 
 void WindMonitoring::directionWindChange(double degree) {

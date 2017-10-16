@@ -14,6 +14,8 @@ TowerOfControl::~TowerOfControl() {
    for (int i= 0 ; i < requests.size() ; i++)
       delete requests[i];
    delete airport;
+   timer->remove(this);
+   instance= nullptr;
 }
 
 long TowerOfControl::airplaneRequestLanding(Airplane* airplane) {
@@ -23,8 +25,7 @@ long TowerOfControl::airplaneRequestLanding(Airplane* airplane) {
    return timer->getActualTime();
 }
 
-long TowerOfControl::airplaneRequestTakeOff(Airplane* airplane)
-{
+long TowerOfControl::airplaneRequestTakeOff(Airplane* airplane) {
    Request* request= new TakeOffRequest(airplane);
    requests.push_back(request);
    verifyRequests();
@@ -44,12 +45,11 @@ void TowerOfControl::verifyRequests() {
 bool TowerOfControl::verifyRequest(Request& request) {
    switch (request.getTypeRequest()) {
       case Request::LANDING:  return resolveLandingRequest(dynamic_cast<LandingRequest&>(request));
-      case Request::TAKEOFF:  return resolveLandingTakeOff(dynamic_cast<TakeOffRequest&>(request));
+      case Request::TAKEOFF:  return resolveTakeOffRequest(dynamic_cast<TakeOffRequest&>(request));
    }
 }
 
-bool TowerOfControl::resolveLandingRequest(LandingRequest& landingRequest)
-{
+bool TowerOfControl::resolveLandingRequest(LandingRequest& landingRequest) {
    if (airplanesInLand < limitAirplanes) {
       if (airport->requestUseAirport(landingRequest.getAirplane())) {
          ++airplanesInLand;
@@ -60,8 +60,7 @@ bool TowerOfControl::resolveLandingRequest(LandingRequest& landingRequest)
    return false;
 }
 
-bool TowerOfControl::resolveLandingTakeOff(TakeOffRequest& takeOffRequest)
-{
+bool TowerOfControl::resolveTakeOffRequest(TakeOffRequest& takeOffRequest) {
    if (airport->requestUseAirport(takeOffRequest.getAirplane())) {
       --airplanesInLand;
       requestResolved(takeOffRequest);
@@ -70,13 +69,11 @@ bool TowerOfControl::resolveLandingTakeOff(TakeOffRequest& takeOffRequest)
    return false;
 }
 
-void TowerOfControl::requestResolved(Request& request)
-{
+void TowerOfControl::requestResolved(Request& request) {
    request.getAirplane()->allowedLanding(timer->getActualTime(), timer->getActualTime() + MyRandom::generateRandomValueBetween(5, 10));
 }
 
-void TowerOfControl::setLimitAirplanes(int limit) 
-{
+void TowerOfControl::setLimitAirplanes(int limit)  {
    limitAirplanes= limit;
 }
 

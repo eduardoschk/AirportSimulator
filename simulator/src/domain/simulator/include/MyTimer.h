@@ -24,7 +24,7 @@ public:
 
    static long getActualTime();
    static void sleep(const int seconds);
-   void startStopwatch();
+   void startStopwatch(const long limit);
 
    void add(Observer* observer);
    void remove(Observer* observer);

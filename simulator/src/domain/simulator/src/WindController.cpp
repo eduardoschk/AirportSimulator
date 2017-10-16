@@ -14,6 +14,7 @@ WindController::WindController() : timer(MyTimer::getTimer()), windMonitoring(Wi
 
 WindController::~WindController() {
    delete windMonitoring;
+   timer->remove(this);
 }
 
 

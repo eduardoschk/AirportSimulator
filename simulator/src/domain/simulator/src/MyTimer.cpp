@@ -6,11 +6,11 @@
 
 MyTimer::~MyTimer() {
    observers.clear();
+   instance= nullptr;
 }
 
 
-long MyTimer::getActualTime() 
-{
+long MyTimer::getActualTime() {
    time_t t;
    return time(&t); 
 }
@@ -21,11 +21,11 @@ void MyTimer::sleep(const int seconds) {
    for(time(&actualTime); actualTime < start + seconds; time(&actualTime)) {}
 }
 
-void MyTimer::startStopwatch() 
-{
+void MyTimer::startStopwatch(const long limit) {
    time(&initialTimer);
-   time_t timeOut= initialTimer + 20;
-   for ( time_t actualTime= MyTimer::getActualTime() ; actualTime <= timeOut ; time(&actualTime) , sleep(1)) {
+   time_t timeOut= initialTimer + limit;
+   
+   for (time_t actualTime= MyTimer::getActualTime() ; actualTime <= timeOut ; sleep(1), time(&actualTime)) {
       std::cout << "---------------" << getDateOnTimestamp(actualTime) << "---------------\n";
       notifyAll();
    }
@@ -35,11 +35,11 @@ void MyTimer::add(Observer* observer) {
    observers.push_back(observer);
 }
 
-void MyTimer::remove(Observer* observer)
-{
+void MyTimer::remove(Observer* observer) {
    for (ObserversIterator iterator = observers.begin() ; iterator != observers.end() ; ++iterator) {
       if ((*iterator) == observer) {
          observers.erase(iterator);
+         break;
       }
    }
 }

@@ -2,17 +2,13 @@
 
 bool Direction::areTransversesDirections(Direction::DIRECTIONS directionOne, Direction::DIRECTIONS directionTwo) {
    switch (directionOne) {
-   case SOUTH: 
-   case NORTH:
+   case SOUTH:  case NORTH:
       return directionTwo != Direction::NORTH && directionTwo != Direction::SOUTH;
-   case WEST:
-   case EAST:
+   case WEST: case EAST:
       return directionTwo != Direction::WEST && directionTwo != Direction::EAST;
-   case NORTHEAST:
-   case SOUTHWEST:
+   case NORTHEAST: case SOUTHWEST:
       return directionTwo != Direction::NORTHEAST && directionTwo != Direction::SOUTHWEST;
-   case NORTHWEST:
-   case SOUTHEAST:
+   case NORTHWEST: case SOUTHEAST:
       return directionTwo != Direction::NORTHWEST && directionTwo != Direction::SOUTHEAST;
    }
    return false;

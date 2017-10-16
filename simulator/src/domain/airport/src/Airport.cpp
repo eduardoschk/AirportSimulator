@@ -7,17 +7,16 @@
 //para testes
 #include <iostream>
 
-Airport::Airport() : windMonitoring(WindMonitoring::getInstance())
-{
+Airport::Airport() : windMonitoring(WindMonitoring::getInstance()) {
    runWays[0]= new RunWay(Direction::SOUTH);
    runWays[1]= new RunWay(Direction::WEST);
    runWays[2]= new RunWay(Direction::SOUTHWEST);
 }
 
-Airport::~Airport()
-{
+Airport::~Airport() {
    for (int i= 0 ; i < 3 ; ++i) 
       delete runWays[i];
+   instance= nullptr;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -59,7 +58,7 @@ bool Airport::requestUseAirport(Airplane* _airplane) {
 ///// Singleton ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-static Airport* instance = nullptr;
+Airport* Airport::instance = nullptr;
 
 Airport* Airport::getInstance() {
    if (!instance)

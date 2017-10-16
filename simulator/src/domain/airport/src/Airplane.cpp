@@ -21,8 +21,11 @@ void Airplane::requestLandingToAirport() {
    timeLimitResponseLandingRequest = actualTime + 8;
 }
 
-void Airplane::allowedLanding(long time, long _timeToNextFlight)
-{
+void Airplane::requestTakeOffToAirport() {
+   towerOfControl->airplaneRequestTakeOff(this);
+}
+
+void Airplane::allowedLanding(long time, long _timeToNextFlight) {
    timeAllowdLanding= time;
    timeToNextFlight= _timeToNextFlight;
 }
@@ -31,22 +34,34 @@ void Airplane::changedAirport() {
    towerOfControl->changedAirport(this);
 }
 
-long Airplane::getTimeLimitResponseLandingRequest()
-{
+long Airplane::getTimeLimitResponseLandingRequest() {
    return timeLimitResponseLandingRequest;
 }
 
-long Airplane::getTimeToNextFlight()
-{
+long Airplane::getTimeToNextFlight() {
    return timeToNextFlight;
 }
 
-void Airplane::requestTakeOffToAirport()
-{
-   towerOfControl->airplaneRequestTakeOff(this);
+long Airplane::getTimeAllowdLanding() {
+   return timeAllowdLanding;
 }
 
-long Airplane::getTimeAllowdLanding()
-{
-   return timeAllowdLanding;
+void Airplane::setName(std::string newName) {
+   name= newName;
+}
+
+void Airplane::setCountPassengers(int newCountPassangers) {
+   passengers= newCountPassangers;
+}
+
+void Airplane::setTimeLimitResponseLandingRequest(long newTimeLimitResponseLandingRequest) {
+   timeLimitResponseLandingRequest= newTimeLimitResponseLandingRequest;
+}
+
+void Airplane::setTimeAllowdLanding(long newTimeAllowedLanding) {
+   timeAllowdLanding= newTimeAllowedLanding;
+}
+
+void Airplane::setTimeToNextFlight(long newTimeToNextFlight) {
+   timeToNextFlight= newTimeToNextFlight;
 }
