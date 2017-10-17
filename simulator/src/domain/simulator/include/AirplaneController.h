@@ -5,6 +5,7 @@
 
 class Airplane;
 class MyTimer;
+class Log;
 
 class AirplaneController :
    public Observer
@@ -14,6 +15,8 @@ private:
 
    long timeToNewAirplane;
    MyTimer* timer;
+
+   Log* log;
 
    void generateAirplane();
    void calculateTimeNewAirplane();

@@ -1,8 +1,9 @@
 #include <iostream>
 #include "MyTimer.h"
 #include "RunWay.h"
+#include "Log.h";
 
-RunWay::RunWay(const Direction::DIRECTIONS _directionRunWay) : directionRunWay(_directionRunWay), runWayFree(true) {
+RunWay::RunWay(const Direction::DIRECTIONS _directionRunWay) : directionRunWay(_directionRunWay), runWayFree(true), log(Log::getInstance()) {
    MyTimer::getTimer()->add(this);
 }
 
@@ -26,8 +27,8 @@ bool RunWay::isAvailable() {
 void RunWay::updateTime(long time) {
    if (!runWayFree) {
       if (time >= timeToFreeRunWay) {
-         std::cout << "Pista Liberada! " << Direction::toString(getDirectionRunWay()) << "\n\n";
          runWayFree= true;
+         log->registryEvent(RUNWAYFREE, &(Direction::toString(directionRunWay)));
       }
    }
 }

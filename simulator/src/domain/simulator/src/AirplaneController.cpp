@@ -2,11 +2,12 @@
 #include "MyTimer.h"
 #include "MyRandom.h"
 #include "Airplane.h"
+#include "Log.h"
 
 //Para testes
 #include <iostream>
 
-AirplaneController::AirplaneController() : timer(MyTimer::getTimer()) {
+AirplaneController::AirplaneController() : timer(MyTimer::getTimer()), log(Log::getInstance()) {
    calculateTimeNewAirplane();
    timer->add(this);
 }
@@ -20,18 +21,15 @@ AirplaneController::~AirplaneController() {
 
 void AirplaneController::updateTime(const long time) 
 {
-   if (time >= timeToNewAirplane) {
+   if (time >= timeToNewAirplane)
       generateAirplane();
-   }
    checkUpdateInAirplanesGenerated();
 }
 
-void AirplaneController::generateAirplane()
-{
+void AirplaneController::generateAirplane() {
    Airplane* newAirplane= new Airplane(MyRandom::generateNameAirplane(), MyRandom::generateRandomValueBetween(50, 220));
-   std::cout << "Novo aviao chegando - " << newAirplane->getName() << "\n";
    airplanes.push_back(newAirplane);
-   std::cout << "Solicitando pouso - " << newAirplane->getName() << "\n\n";
+   log->registryEvent(AIRPLANEREQUESTLANDING, &(newAirplane->getName()));
    newAirplane->requestLandingToAirport();
    calculateTimeNewAirplane();
 }
@@ -47,13 +45,14 @@ void AirplaneController::checkUpdateInAirplanesGenerated()
       if (checkAirplaneHasAlreadyLanded(airplane)) {
          if (checkAirplaneReadyToNextFlight(airplane)) {
             std::cout << "Solicitando decolagem - " << airplane->getName() << "\n\n";
-            
+            log->registryEvent( AIRPLANEREQUESTTAKEOFF, &(airplane->getName()));
+
             airplane->requestTakeOffToAirport();  
             airplanes.erase( airplanes.begin() + i );
          }
       } else {
          if (checkTimeOutToAirportResponseRequest(airplane)) {
-            std::cout << "Aviao tempo demais esperando - " << airplane->getName() << "\n\n"; 
+            log->registryEvent(AIRPLANECHANGEAIRPORT, &(airplane->getName()));
             
             airplane->changedAirport();
             delete airplane;

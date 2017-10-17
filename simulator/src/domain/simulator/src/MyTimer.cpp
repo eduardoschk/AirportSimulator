@@ -25,10 +25,8 @@ void MyTimer::startStopwatch(const long limit) {
    time(&initialTimer);
    time_t timeOut= initialTimer + limit;
    
-   for (time_t actualTime= MyTimer::getActualTime() ; actualTime <= timeOut ; sleep(1), time(&actualTime)) {
-      std::cout << "---------------" << getDateOnTimestamp(actualTime) << "---------------\n";
+   for (time_t actualTime= MyTimer::getActualTime() ; actualTime <= timeOut ; sleep(1), time(&actualTime))
       notifyAll();
-   }
 }
 
 void MyTimer::add(Observer* observer) {
@@ -45,19 +43,28 @@ void MyTimer::remove(Observer* observer) {
 }
 
 void MyTimer::notifyAll() {
-   for (ObserversIterator iterator = observers.begin() ; iterator != observers.end() ; ++iterator) {
+   for (ObserversIterator iterator = observers.begin() ; iterator != observers.end() ; ++iterator)
       (*iterator)->updateTime(MyTimer::getActualTime());
-   }
 }
 
-std::string MyTimer::getDateOnTimestamp(const time_t time)
-{
+time_t MyTimer::getInitialTimer() {
+   return initialTimer;
+}
+
+std::string MyTimer::getDateOnTimestamp(const time_t time) {
+   time_t initialTimer;
+
+   if (instance->getInitialTimer() > 0) 
+      initialTimer= instance->getInitialTimer();
+   else 
+      initialTimer= getActualTime();
+
    time_t aux= initialTimer;
    aux+= (time - initialTimer) * 240;
    struct tm *tm = localtime(&aux);
-   char teste[17];
-   strftime(teste, 17, "%d/%m/%Y %H:%M", tm);
-   return std::string(teste);
+   char buffer[17];
+   strftime(buffer, 17, "%d/%m/%Y %H:%M", tm);
+   return std::string(buffer);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

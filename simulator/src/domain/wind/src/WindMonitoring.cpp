@@ -2,11 +2,12 @@
 #include "WindFactory.h"
 #include "MyRandom.h"
 #include "MyTimer.h"
+#include "Log.h"
 
 //para testes
 #include <iostream>
 
-WindMonitoring::WindMonitoring() : windFactory(new WindFactory()), actualWind(nullptr) {
+WindMonitoring::WindMonitoring() : windFactory(new WindFactory()), actualWind(nullptr), log(Log::getInstance()) {
    directionWindChange(MyRandom::generateRandomValueBetween(0, 36) * 10);
 }
 
@@ -20,6 +21,7 @@ void WindMonitoring::directionWindChange(double degree) {
    if (actualWind)
       delete actualWind;
    actualWind= windFactory->makeWindStatus(degree);
+   log->registryEvent(WINDCHANGE, actualWind);
 }
 
 Wind* WindMonitoring::getActualWind() {

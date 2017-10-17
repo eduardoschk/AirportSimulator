@@ -6,6 +6,7 @@
 #include "Direction.h"
 #include "Observer.h"
 
+class Log;
 class MyTimer;
 
 class RunWay :
@@ -16,6 +17,8 @@ private:
 
    bool runWayFree;
    long timeToFreeRunWay;
+
+   Log* log;
 
    void calculateTimeToFreeRunWay();
 

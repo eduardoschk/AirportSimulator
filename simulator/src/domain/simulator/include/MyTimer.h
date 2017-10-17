@@ -30,7 +30,9 @@ public:
    void remove(Observer* observer);
    void notifyAll();
 
-   std::string getDateOnTimestamp(const time_t time);
+   time_t getInitialTimer();
+
+   static std::string getDateOnTimestamp(const time_t time);
 
    static MyTimer* getTimer();
 };

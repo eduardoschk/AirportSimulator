@@ -6,6 +6,7 @@
 #include "Wind.h"
 
 class WindFactory;
+class Log;
 
 class WindMonitoring
 {
@@ -15,6 +16,8 @@ private:
    Wind* actualWind;
 
    static WindMonitoring* instance;
+
+   Log* log;
 
    WindMonitoring();
 

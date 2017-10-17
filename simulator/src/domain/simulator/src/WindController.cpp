@@ -19,8 +19,7 @@ WindController::~WindController() {
 
 
 void WindController::changeWind() {
-   windMonitoring->directionWindChange( MyRandom::generateRandomValueBetween(0, 36) * 10 );
-   std::cout << "Vento alterado para - " << Direction::toString(windMonitoring->getActualWind()->getDirectionWind()) << "\n\n"; 
+   windMonitoring->directionWindChange( MyRandom::generateRandomValueBetween(0, 36) * 10 ); 
    calculateTimeWindChange();
 }
 
