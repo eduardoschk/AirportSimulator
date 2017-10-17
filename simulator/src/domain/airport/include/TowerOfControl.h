@@ -3,6 +3,7 @@
 #include <deque>
 #include "Observer.h"
 #include "Request.h"
+#include "Log.h"
 
 class Airport;
 class Airplane;
@@ -22,6 +23,8 @@ private:
    MyTimer* timer;
 
    static TowerOfControl* instance;
+
+   Log* log;
 
    void verifyRequests();
    bool verifyRequest(Request& request);

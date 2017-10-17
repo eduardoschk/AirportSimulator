@@ -4,8 +4,8 @@
 #include "Airplane.h"
 #include "Log.h"
 
-//Para testes
-#include <iostream>
+int minPassengers= 50;
+int maxPassengers= 220;
 
 AirplaneController::AirplaneController() : timer(MyTimer::getTimer()), log(Log::getInstance()) {
    calculateTimeNewAirplane();
@@ -27,7 +27,7 @@ void AirplaneController::updateTime(const long time)
 }
 
 void AirplaneController::generateAirplane() {
-   Airplane* newAirplane= new Airplane(MyRandom::generateNameAirplane(), MyRandom::generateRandomValueBetween(50, 220));
+   Airplane* newAirplane= new Airplane(MyRandom::generateNameAirplane(), MyRandom::generateRandomValueBetween(minPassengers, maxPassengers));
    airplanes.push_back(newAirplane);
    log->registryEvent(AIRPLANEREQUESTLANDING, &(newAirplane->getName()));
    newAirplane->requestLandingToAirport();
@@ -44,9 +44,9 @@ void AirplaneController::checkUpdateInAirplanesGenerated()
       Airplane* airplane= airplanes[i];
       if (checkAirplaneHasAlreadyLanded(airplane)) {
          if (checkAirplaneReadyToNextFlight(airplane)) {
-            std::cout << "Solicitando decolagem - " << airplane->getName() << "\n\n";
             log->registryEvent( AIRPLANEREQUESTTAKEOFF, &(airplane->getName()));
 
+            airplane->setCountPassengers(MyRandom::generateRandomValueBetween(minPassengers, maxPassengers));
             airplane->requestTakeOffToAirport();  
             airplanes.erase( airplanes.begin() + i );
          }

@@ -15,6 +15,18 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/simulator/include")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/wind/include")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/airport/include")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/report/include")
+
+file(GLOB EVENTS	"${CMAKE_CURRENT_SOURCE_DIR}/report/include/Event*"
+					"${CMAKE_CURRENT_SOURCE_DIR}/report/src/Event*")
+					
+source_group( Events FILES ${EVENTS} )
+					
+file(GLOB REPORTS	"${CMAKE_CURRENT_SOURCE_DIR}/report/include/Report*"
+					"${CMAKE_CURRENT_SOURCE_DIR}/report/src/Report*"
+					"${CMAKE_CURRENT_SOURCE_DIR}/report/src/Log*"
+					"${CMAKE_CURRENT_SOURCE_DIR}/report/include/Log*")
+					
+source_group( Reports FILES ${REPORTS} )
 			
 add_library(report ${REPORT})
 add_library(airport ${AIRPORT})

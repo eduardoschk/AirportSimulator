@@ -5,10 +5,7 @@
 #include "MyTimer.h"
 #include "MyRandom.h"
 
-//teste
-#include <iostream>
-
-TowerOfControl::TowerOfControl() : airport(Airport::getInstance()), timer(MyTimer::getTimer()), airplanesInLand(0) {}
+TowerOfControl::TowerOfControl() : airport(Airport::getInstance()), timer(MyTimer::getTimer()), airplanesInLand(0), log(Log::getInstance()) {}
 
 TowerOfControl::~TowerOfControl() {
    for (int i= 0 ; i < requests.size() ; i++)
@@ -54,6 +51,7 @@ bool TowerOfControl::resolveLandingRequest(LandingRequest& landingRequest) {
       if (airport->requestUseAirport(landingRequest.getAirplane())) {
          ++airplanesInLand;
          requestResolved(landingRequest);  
+         log->registryEvent(AIRPLANELANDING, landingRequest.getAirplane());
          return true;
       }   
    }
@@ -64,6 +62,7 @@ bool TowerOfControl::resolveTakeOffRequest(TakeOffRequest& takeOffRequest) {
    if (airport->requestUseAirport(takeOffRequest.getAirplane())) {
       --airplanesInLand;
       requestResolved(takeOffRequest);
+      log->registryEvent(AIRPLANETAKEOFF, takeOffRequest.getAirplane());
       return true;
    }
    return false;

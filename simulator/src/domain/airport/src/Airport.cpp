@@ -47,7 +47,6 @@ bool Airport::runWaysIsAvaible(RunWay* runWay) {
 bool Airport::requestUseAirport(Airplane* _airplane) {
    RunWay* runWay= getRunWayAvailable();
    if (runWay) {
-      std::cout << "Pista Ocupada! " << Direction::toString(runWay->getDirectionRunWay()) << " pelo aviao " << _airplane->getName() << "\n\n"; 
       runWay->runwayPutToUse();
       return true;
    } 

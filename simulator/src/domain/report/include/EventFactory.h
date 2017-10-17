@@ -1,5 +1,6 @@
 #pragma once
 #include "Event.h"
+#include <exception>
 
 class MyTimer;
 
@@ -7,6 +8,8 @@ class EventFactory
 {
 private:
    MyTimer* timer;
+
+   class EventCreateError : public std::exception { virtual const char* what() const { return "Erro ao criar evento"; }  };
 
    Event* makeChangeWindEvent(void* arg);
    Event* makeAirplaneRequestAirportEvent(void* arg);
@@ -21,5 +24,5 @@ public:
    ~EventFactory();
    EventFactory();
 
-   Event* makeEvent(EVENTTYPE type, void* arg[]);
+   Event* makeEvent(EVENTTYPE type, void* arg);
 };

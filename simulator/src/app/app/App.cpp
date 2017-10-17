@@ -11,7 +11,7 @@ void App::runApp() {
    WindController *wind= new WindController();
    AirplaneController *airplane= new AirplaneController();
    TowerOfControl *tc= TowerOfControl::getInstance();
-   tc->setLimitAirplanes(1);
+   tc->setLimitAirplanes(5);
    MyTimer* mt= MyTimer::getTimer();
    mt->startStopwatch(20);
 

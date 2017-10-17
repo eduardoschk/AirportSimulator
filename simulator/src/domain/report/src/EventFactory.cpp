@@ -23,7 +23,7 @@ Event* EventFactory::makeEvent(EVENTTYPE type, void* arg) {
    case AIRPLANEREQUESTTAKEOFF: return makeAirplaneRequestTakeOffEvent(arg);
    case AIRPLANETAKEOFF: return makeAirplaneTakeOffdEvent(arg);
    case RUNWAYFREE: return makeRunWayFreeEvent(arg);
-   default: return nullptr;
+   default: throw EventCreateError();
    }
 }
 
@@ -44,7 +44,7 @@ Event* EventFactory::makeAirplaneRequestTakeOffEvent(void* arg) {
 }
 
 Event* EventFactory::makeAirplaneTakeOffdEvent(void* arg) {
-   return nullptr;
+   return new EventAirplaneTakeOff(timer->getActualTime(), ((Airplane*)arg)->getName(), ((Airplane*)arg)->getCountPassengers());
 }
 
 Event* EventFactory::makeRunWayFreeEvent(void* arg) {
@@ -52,7 +52,7 @@ Event* EventFactory::makeRunWayFreeEvent(void* arg) {
 }
 
 Event* EventFactory::makeAirplaneLandingEvent(void* arg) {
-   return nullptr;
+   return new EventAirplaneLanding(timer->getActualTime(), ((Airplane*)arg)->getName(), ((Airplane*)arg)->getCountPassengers());
 }
 
 std::string EventFactory::getStringByArg(void* arg) {
