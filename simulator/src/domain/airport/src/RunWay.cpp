@@ -28,7 +28,7 @@ void RunWay::updateTime(long time) {
    if (!runWayFree) {
       if (time >= timeToFreeRunWay) {
          runWayFree= true;
-         log->registryEvent(RUNWAYFREE, &(Direction::toString(directionRunWay)));
+         log->registryEvent(EVENTRUNWAYFREE, &(Direction::toString(directionRunWay)));
       }
    }
 }

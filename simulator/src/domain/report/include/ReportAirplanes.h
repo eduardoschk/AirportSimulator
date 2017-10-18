@@ -1,5 +1,9 @@
 #pragma once
-#include "report.h"
+
+#ifndef REPORT_AIRPLANE_H
+#define REPORT_AIRPLANE_H
+
+#include "Report.h"
 
 class ReportAirplanes :
    public Report
@@ -7,4 +11,8 @@ class ReportAirplanes :
 public:
    ~ReportAirplanes();
    ReportAirplanes();
+
+   std::string generatingReport();
 };
+
+#endif // REPORT_AIRPLANE_H

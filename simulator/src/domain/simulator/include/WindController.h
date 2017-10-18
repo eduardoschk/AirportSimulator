@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef WIND_CONTROLLER_H
+#define WIND_CONTROLLER_H
+
 #include "Observer.h"
 
 class MyTimer;
@@ -23,3 +26,5 @@ public:
 
    void updateTime(const long time);
 };
+
+#endif //WIND_CONTROLLER_H

@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef EVENT_RUN_WAY_RETURNS_FREE_H
+#define EVENT_RUN_WAY_RETURNS_FREE_H
+
 #include "event.h"
 
 class EventRunWayReturnFree :
@@ -13,3 +17,5 @@ public:
    virtual EVENTTYPE getTypeEvent();
    virtual std::string getEventToString();
 };
+
+#endif // EVENT_RUN_WAY_RETURNS_FREE_H

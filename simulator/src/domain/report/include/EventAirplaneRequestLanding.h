@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef EVENT_AIRPLANE_REQUEST_LANDING_H
+#define EVENT_AIRPLANE_REQUEST_LANDING_H
+
 #include "event.h"
 #include <string>
 
@@ -14,3 +18,5 @@ public:
    EVENTTYPE getTypeEvent();
    std::string getEventToString();
 };
+
+#endif // EVENT_AIRPLANE_REQUEST_LANDING_H

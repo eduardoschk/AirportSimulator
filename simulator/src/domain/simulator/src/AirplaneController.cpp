@@ -19,8 +19,7 @@ AirplaneController::~AirplaneController() {
 }
 
 
-void AirplaneController::updateTime(const long time) 
-{
+void AirplaneController::updateTime(const long time)  {
    if (time >= timeToNewAirplane)
       generateAirplane();
    checkUpdateInAirplanesGenerated();
@@ -29,7 +28,7 @@ void AirplaneController::updateTime(const long time)
 void AirplaneController::generateAirplane() {
    Airplane* newAirplane= new Airplane(MyRandom::generateNameAirplane(), MyRandom::generateRandomValueBetween(minPassengers, maxPassengers));
    airplanes.push_back(newAirplane);
-   log->registryEvent(AIRPLANEREQUESTLANDING, &(newAirplane->getName()));
+   log->registryEvent(EVENTAIRPLANEREQUESTLANDING, &(newAirplane->getName()));
    newAirplane->requestLandingToAirport();
    calculateTimeNewAirplane();
 }
@@ -44,7 +43,7 @@ void AirplaneController::checkUpdateInAirplanesGenerated()
       Airplane* airplane= airplanes[i];
       if (checkAirplaneHasAlreadyLanded(airplane)) {
          if (checkAirplaneReadyToNextFlight(airplane)) {
-            log->registryEvent( AIRPLANEREQUESTTAKEOFF, &(airplane->getName()));
+            log->registryEvent( EVENTAIRPLANEREQUESTTAKEOFF, &(airplane->getName()));
 
             airplane->setCountPassengers(MyRandom::generateRandomValueBetween(minPassengers, maxPassengers));
             airplane->requestTakeOffToAirport();  
@@ -52,7 +51,7 @@ void AirplaneController::checkUpdateInAirplanesGenerated()
          }
       } else {
          if (checkTimeOutToAirportResponseRequest(airplane)) {
-            log->registryEvent(AIRPLANECHANGEAIRPORT, &(airplane->getName()));
+            log->registryEvent(EVENTAIRPLANECHANGEAIRPORT, &(airplane->getName()));
             
             airplane->changedAirport();
             delete airplane;

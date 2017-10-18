@@ -32,4 +32,4 @@ public:
    static WindMonitoring* getInstance();
 };
 
-#endif
+#endif // WIND_MONITORING_H

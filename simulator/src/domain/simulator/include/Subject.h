@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef SUBJECT_H
+#define SUBJECT_H
+
 class Observer;
 
 class Subject
@@ -10,3 +13,4 @@ public:
    virtual void notifyAll() = 0;
 };
 
+#endif // SUBJECT_H

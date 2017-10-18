@@ -21,7 +21,7 @@ void WindMonitoring::directionWindChange(double degree) {
    if (actualWind)
       delete actualWind;
    actualWind= windFactory->makeWindStatus(degree);
-   log->registryEvent(WINDCHANGE, actualWind);
+   log->registryEvent(EVENTWINDCHANGE, actualWind);
 }
 
 Wind* WindMonitoring::getActualWind() {

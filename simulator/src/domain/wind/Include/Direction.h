@@ -11,4 +11,4 @@ namespace Direction {
    std::string toString(DIRECTIONS direction); 
 };
 
-#endif
+#endif // DIRECTION_H

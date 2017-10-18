@@ -61,4 +61,4 @@ class NortheastWind : public Wind {
    }
 };
 
-#endif
+#endif // WIND_H

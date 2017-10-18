@@ -1,8 +1,10 @@
 #pragma once
 
+#ifndef MY_TIMER_H
+#define MY_TIMER_H
+
 #include <deque>
 #include "Subject.h"
-class string;
 
 class Observer;
 
@@ -36,3 +38,5 @@ public:
 
    static MyTimer* getTimer();
 };
+
+#endif // MY_TIMER_H

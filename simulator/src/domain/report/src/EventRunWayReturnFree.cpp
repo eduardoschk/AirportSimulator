@@ -9,12 +9,12 @@ EventRunWayReturnFree::EventRunWayReturnFree(long time, std::string idRunWay) : 
 }
 
 EVENTTYPE EventRunWayReturnFree::getTypeEvent() {
-   return RUNWAYFREE;
+   return EVENTRUNWAYFREE;
 }
 
 std::string EventRunWayReturnFree::getEventToString() {
    std::stringstream ss;
   ss << Event::getEventToString();
-   ss << "Pista " << runWay << " retornou a ficar disponivel";
+   ss << "Pista " << runWay << " retornou a ficar disponivel \n";
    return ss.str();
 }

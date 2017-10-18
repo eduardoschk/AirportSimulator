@@ -27,6 +27,7 @@ void MyTimer::startStopwatch(const long limit) {
    
    for (time_t actualTime= MyTimer::getActualTime() ; actualTime <= timeOut ; sleep(1), time(&actualTime))
       notifyAll();
+   std::cout << "Finalizando simulação" << std::endl;
 }
 
 void MyTimer::add(Observer* observer) {

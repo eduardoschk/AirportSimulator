@@ -8,12 +8,16 @@ EventAirplaneTakeOff::EventAirplaneTakeOff(long time, std::string _airplaneName,
 }
 
 EVENTTYPE EventAirplaneTakeOff::getTypeEvent() {
-   return AIRPLANETAKEOFF;
+   return EVENTAIRPLANETAKEOFF;
 }
 
 std::string EventAirplaneTakeOff::getEventToString() {
    std::stringstream ss;
    ss << Event::getEventToString();
-   ss << "Avião " << airplaneName << " iniciando procedimento de decolagem na pista com " << passengers << " passeiros";
+   ss << "Avião " << airplaneName << " iniciando procedimento de decolagem na pista com " << passengers << " passeiros \n";
    return ss.str();
+}
+
+int EventAirplaneTakeOff::getCountPassengers() {
+   return passengers;
 }

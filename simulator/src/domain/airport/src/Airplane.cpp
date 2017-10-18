@@ -1,8 +1,9 @@
 #include "Airplane.h"
 #include "TowerOfControl.h"
 
-//Testar
-#include <iostream>
+// In seconds, each real second represents 4 minutes on simulator time
+
+int limitTimeRequest = 8; 
 
 Airplane::Airplane(std::string _name, int _passengers) : name(_name), passengers(_passengers), towerOfControl(TowerOfControl::getInstance()), timeLimitResponseLandingRequest(0), timeAllowdLanding(0), timeToNextFlight(0) {}
 
@@ -17,8 +18,8 @@ int Airplane::getCountPassengers() {
 }
 
 void Airplane::requestLandingToAirport() {
-   long actualTime= towerOfControl->airplaneRequestLanding(this);
-   timeLimitResponseLandingRequest = actualTime + 8;
+   timeRequestLanding= towerOfControl->airplaneRequestLanding(this);
+   timeLimitResponseLandingRequest = timeRequestLanding + limitTimeRequest;
 }
 
 void Airplane::requestTakeOffToAirport() {
@@ -64,4 +65,8 @@ void Airplane::setTimeAllowdLanding(long newTimeAllowedLanding) {
 
 void Airplane::setTimeToNextFlight(long newTimeToNextFlight) {
    timeToNextFlight= newTimeToNextFlight;
+}
+
+long Airplane::getTimeRequestLanding() {
+   return timeRequestLanding;
 }

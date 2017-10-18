@@ -1,10 +1,23 @@
 #pragma once
 
+#ifndef EVENT_H
+#define EVENT_H
+
 #include <string>
 #include <sstream>
 #include "MyTimer.h"
 
-enum EVENTTYPE {WINDCHANGE, AIRPLANELANDING, AIRPLANECHANGEAIRPORT, AIRPLANEREQUESTLANDING, AIRPLANEREQUESTTAKEOFF, AIRPLANETAKEOFF, RUNWAYFREE };
+enum EVENTTYPE {  EVENTWINDCHANGE, 
+                  EVENTAIRPLANELANDING, 
+                  EVENTAIRPLANECHANGEAIRPORT, 
+                  EVENTAIRPLANEREQUESTLANDING, 
+                  EVENTAIRPLANEREQUESTTAKEOFF, 
+                  EVENTAIRPLANETAKEOFF, 
+                  EVENTRUNWAYFREE, 
+                  EVENTAIRPLANESWAITINGMORETHANFIVE, 
+                  EVENTCAPACITYMORETHANSEVENTY, 
+                  EVENTREQUESTSTAKEOFFMORETHANFIVE 
+};
 
 class Event
 {
@@ -21,3 +34,5 @@ public:
       return ss.str();
    }
 };
+
+#endif // EVENT_H

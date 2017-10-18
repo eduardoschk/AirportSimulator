@@ -9,12 +9,12 @@ EventAirplaneChangeAirport::EventAirplaneChangeAirport(long time, std::string _a
 }
 
 EVENTTYPE EventAirplaneChangeAirport::getTypeEvent() {
-   return AIRPLANECHANGEAIRPORT;
+   return EVENTAIRPLANECHANGEAIRPORT;
 }
 
 std::string EventAirplaneChangeAirport::getEventToString() {
    std::stringstream ss;
    ss << Event::getEventToString();
-   ss << "Avião " << airplaneName << " se encaminha a outro aeroporto por demora na liberação da pista";
+   ss << "Avião " << airplaneName << " se encaminha a outro aeroporto por demora na liberação da pista \n";
    return ss.str();
 }

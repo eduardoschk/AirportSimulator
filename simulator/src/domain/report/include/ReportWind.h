@@ -1,5 +1,8 @@
 #pragma once
-#include "report.h"
+
+#ifndef REPORT_WIND_H
+#define REPORT_WIND_H
+#include "Report.h"
 
 class ReportWind :
    public Report
@@ -7,4 +10,8 @@ class ReportWind :
 public:
    ~ReportWind();
    ReportWind(); 
+
+   std::string generatingReport();
 };
+
+#endif // REPORT_WIND_H

@@ -1,4 +1,7 @@
 #pragma once
+#ifndef REQUEST_H
+#define REQUEST_H
+
 #include "Airplane.h"
 
 class Request
@@ -13,6 +16,7 @@ public:
 
    Airplane* getAirplane() { return airplane; }
    virtual TYPEREQUEST getTypeRequest() = 0;
+   virtual std::string getStringTypeRequest() = 0;
 };
 
 class LandingRequest : public Request {
@@ -22,7 +26,7 @@ public:
    }
    
    TYPEREQUEST getTypeRequest() { return TYPEREQUEST::LANDING; }
-   
+   std::string getStringTypeRequest() { return "Pouso"; }
 };
 
 class TakeOffRequest : public Request {
@@ -35,4 +39,7 @@ public:
       airplane= _airplane;
    }
    TYPEREQUEST getTypeRequest() { return TYPEREQUEST::TAKEOFF; }
+   std::string getStringTypeRequest() { return "Decolagem"; }
 };
+
+#endif //REQUEST_H

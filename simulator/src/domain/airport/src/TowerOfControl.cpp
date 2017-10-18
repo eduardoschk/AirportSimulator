@@ -4,29 +4,33 @@
 #include "Airport.h"
 #include "MyTimer.h"
 #include "MyRandom.h"
+#include "Log.h"
 
-TowerOfControl::TowerOfControl() : airport(Airport::getInstance()), timer(MyTimer::getTimer()), airplanesInLand(0), log(Log::getInstance()) {}
+TowerOfControl::TowerOfControl() : airport(Airport::getInstance()), airplanesInLand(0), log(Log::getInstance()) {}
 
 TowerOfControl::~TowerOfControl() {
    for (int i= 0 ; i < requests.size() ; i++)
       delete requests[i];
    delete airport;
-   timer->remove(this);
    instance= nullptr;
+}
+
+int TowerOfControl::getNumberAirplanesOnGround() {
+   return airplanesInLand;
 }
 
 long TowerOfControl::airplaneRequestLanding(Airplane* airplane) {
    Request* request= new LandingRequest(airplane);
    requests.push_back(request);
    verifyRequests();
-   return timer->getActualTime();
+   return MyTimer::getActualTime();
 }
 
 long TowerOfControl::airplaneRequestTakeOff(Airplane* airplane) {
    Request* request= new TakeOffRequest(airplane);
    requests.push_back(request);
    verifyRequests();
-   return timer->getActualTime();
+   return MyTimer::getActualTime();
 }
 
 void TowerOfControl::verifyRequests() {
@@ -51,7 +55,7 @@ bool TowerOfControl::resolveLandingRequest(LandingRequest& landingRequest) {
       if (airport->requestUseAirport(landingRequest.getAirplane())) {
          ++airplanesInLand;
          requestResolved(landingRequest);  
-         log->registryEvent(AIRPLANELANDING, landingRequest.getAirplane());
+         log->registryEvent(EVENTAIRPLANELANDING, landingRequest.getAirplane());
          return true;
       }   
    }
@@ -62,14 +66,14 @@ bool TowerOfControl::resolveTakeOffRequest(TakeOffRequest& takeOffRequest) {
    if (airport->requestUseAirport(takeOffRequest.getAirplane())) {
       --airplanesInLand;
       requestResolved(takeOffRequest);
-      log->registryEvent(AIRPLANETAKEOFF, takeOffRequest.getAirplane());
+      log->registryEvent(EVENTAIRPLANETAKEOFF, takeOffRequest.getAirplane());
       return true;
    }
    return false;
 }
 
 void TowerOfControl::requestResolved(Request& request) {
-   request.getAirplane()->allowedLanding(timer->getActualTime(), timer->getActualTime() + MyRandom::generateRandomValueBetween(5, 10));
+   request.getAirplane()->allowedLanding(MyTimer::getActualTime(), MyTimer::getActualTime() + MyRandom::generateRandomValueBetween(5, 10));
 }
 
 void TowerOfControl::setLimitAirplanes(int limit)  {
@@ -88,9 +92,8 @@ void TowerOfControl::changedAirport(Airplane* airplane) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void TowerOfControl::updateTime(long time) {
-   if (!requests.empty())
-      verifyRequests();
+std::deque<Request*> TowerOfControl::getRequests() {
+   return requests;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -98,9 +101,7 @@ void TowerOfControl::updateTime(long time) {
 TowerOfControl* TowerOfControl::instance = nullptr;
 
 TowerOfControl* TowerOfControl::getInstance() {
-   if (!instance) {
+   if (!instance) 
       instance= new TowerOfControl();
-      MyTimer::getTimer()->add(instance);
-   }
    return instance;
 }

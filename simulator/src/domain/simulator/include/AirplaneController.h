@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef AIRPLANE_CONTROLLER_H
+#define AIRPLANE_CONTROLLER_H
+
 #include <deque>
 #include "Observer.h"
 
@@ -31,3 +34,5 @@ public:
 
    void updateTime(const long time);
 };
+
+#endif //AIRPLANE_CONTROLLER_H

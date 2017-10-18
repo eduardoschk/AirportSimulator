@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef EVENT_AIRPLANE_TAKE_OFF_H
+#define EVENT_AIRPLANE_TAKE_OFF_H
+
 #include "event.h"
 #include <string>
 
@@ -15,4 +19,7 @@ public:
 
    EVENTTYPE getTypeEvent();
    std::string getEventToString();
+   int getCountPassengers();
 };
+
+#endif // EVENT_AIRPLANE_TAKE_OFF_H

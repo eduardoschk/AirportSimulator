@@ -21,4 +21,4 @@ public:
    Wind* makeWindStatus(const double degreeWind) throw(DegreeWindException);
 };
 
-#endif
+#endif // WIND_FACTORY_H

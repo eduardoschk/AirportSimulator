@@ -1,9 +1,11 @@
 #pragma once
+#ifndef AIRPLANE_H
+#define AIRPLANE_H
 
 #include <string>
 
 class TowerOfControl;
-struct FlightPlan;
+
 class Airplane
 {
 private:
@@ -11,6 +13,7 @@ private:
    int passengers;
    TowerOfControl* towerOfControl;
    
+   long timeRequestLanding;
    long timeLimitResponseLandingRequest;
    long timeAllowdLanding;
    long timeToNextFlight;
@@ -36,5 +39,7 @@ public:
    void setTimeLimitResponseLandingRequest(long newTimeLimitResponseLandingRequest);
    void setTimeAllowdLanding(long newTimeAllowedLanding);
    void setTimeToNextFlight(long newTimeToNextFlight);
-
+   long getTimeRequestLanding();
 };
+
+#endif //AIRPLANE_H

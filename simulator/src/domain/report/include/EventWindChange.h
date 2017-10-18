@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef EVENT_WIND_CHANGE_H
+#define EVENT_WIND_CHANGE_H
+
 #include "event.h"
 #include "Direction.h"
 
@@ -14,3 +18,5 @@ public:
    EVENTTYPE getTypeEvent();
    std::string getEventToString();
 };
+
+#endif // EVENT_WIND_CHANGE_H

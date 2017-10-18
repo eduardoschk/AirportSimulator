@@ -2,14 +2,19 @@
 #include "EventFactory.h"
 #include <iostream>
 
-Log::~Log() {}
+Log::~Log() {
+   delete eventFactory;
+   for (int i= 0 ; i < events.size() ; ++i)
+      delete events[i];
+   instance= nullptr;
+}
 
 Log::Log() : eventFactory(new EventFactory()) {}
 
 void Log::registryEvent(EVENTTYPE type, void* arg) {
    Event* newEvent= eventFactory->makeEvent(type, arg);
-   std::cout << newEvent->getEventToString() << std::endl;
-   events.push(newEvent);
+   std::cout << newEvent->getEventToString();
+   events.push_back(newEvent);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

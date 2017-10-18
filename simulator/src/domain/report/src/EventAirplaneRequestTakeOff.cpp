@@ -8,12 +8,12 @@ EventAirplaneRequestTakeOff::EventAirplaneRequestTakeOff(long time, std::string 
 
 
 EVENTTYPE EventAirplaneRequestTakeOff::getTypeEvent() {
-   return AIRPLANEREQUESTTAKEOFF;
+   return EVENTAIRPLANEREQUESTTAKEOFF;
 }
 
 std::string EventAirplaneRequestTakeOff::getEventToString() {
    std::stringstream ss;
    ss << Event::getEventToString();
-   ss << "Avião " << airplaneName << " está solicitando decolagem";
+   ss << "Avião " << airplaneName << " está solicitando decolagem \n";
    return ss.str();
 }

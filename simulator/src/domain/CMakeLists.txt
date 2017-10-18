@@ -9,34 +9,33 @@ file(GLOB SIMULATOR  "${CMAKE_CURRENT_SOURCE_DIR}/simulator/src/*.cpp"
 				  
 file(GLOB REPORT  	"${CMAKE_CURRENT_SOURCE_DIR}/report/src/*.cpp" 
 					"${CMAKE_CURRENT_SOURCE_DIR}/report/include/*.h")
-			
-include_directories("${CMAKE_SOURCE_DIR}/simulator/src/util")
+					
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/support/include")	
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/simulator/include")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/wind/include")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/airport/include")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/report/include")
 
-file(GLOB EVENTS	"${CMAKE_CURRENT_SOURCE_DIR}/report/include/Event*"
-					"${CMAKE_CURRENT_SOURCE_DIR}/report/src/Event*")
+file(GLOB EVENTS_HEADERS	"${CMAKE_CURRENT_SOURCE_DIR}/report/include/Event*")
+file(GLOB EVENTS_SOURCE		"${CMAKE_CURRENT_SOURCE_DIR}/report/src/Event*")
 					
-source_group( Events FILES ${EVENTS} )
+source_group( "Events Headers" FILES ${EVENTS_HEADERS} )
+source_group( "Events Source"  FILES ${EVENTS_SOURCE} )
 					
-file(GLOB REPORTS	"${CMAKE_CURRENT_SOURCE_DIR}/report/include/Report*"
-					"${CMAKE_CURRENT_SOURCE_DIR}/report/src/Report*"
-					"${CMAKE_CURRENT_SOURCE_DIR}/report/src/Log*"
-					"${CMAKE_CURRENT_SOURCE_DIR}/report/include/Log*")
+file(GLOB REPORTS_HEADERS	"${CMAKE_CURRENT_SOURCE_DIR}/report/include/Report*"
+							"${CMAKE_CURRENT_SOURCE_DIR}/report/include/Log*")
+							
+file(GLOB REPORTS_SOURCE	"${CMAKE_CURRENT_SOURCE_DIR}/report/src/Report*"
+							"${CMAKE_CURRENT_SOURCE_DIR}/report/src/Log*")
 					
-source_group( Reports FILES ${REPORTS} )
+source_group( "Reports Headers" FILES ${REPORTS_HEADERS} )
+source_group( "Reports Source"  FILES ${REPORTS_SOURCE} )
 			
 add_library(report ${REPORT})
 add_library(airport ${AIRPORT})
 add_library(wind ${WIND})
 
 add_library(domain ${SIMULATOR})
-
-target_link_libraries(domain util)
-target_link_libraries(airport util)
-target_link_libraries(wind util)
 
 target_link_libraries(wind report)
 target_link_libraries(airport report)

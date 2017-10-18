@@ -7,12 +7,12 @@ EventAirplaneRequestLanding::EventAirplaneRequestLanding(long time, std::string 
 }
 
 EVENTTYPE EventAirplaneRequestLanding::getTypeEvent() {
-   return AIRPLANEREQUESTLANDING;
+   return EVENTAIRPLANEREQUESTLANDING;
 }
 
 std::string EventAirplaneRequestLanding::getEventToString() {
    std::stringstream ss;
    ss << Event::getEventToString();
-   ss << "Avião " << airplaneName << " está solicitando pista para pousar";
+   ss << "Avião " << airplaneName << " está solicitando pista para pousar \n";
    return ss.str();
 }

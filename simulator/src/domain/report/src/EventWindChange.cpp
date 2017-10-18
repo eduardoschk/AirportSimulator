@@ -9,12 +9,12 @@ EventWindChange::EventWindChange(long time, Direction::DIRECTIONS newDirection) 
 }
 
 EVENTTYPE EventWindChange::getTypeEvent() {
-   return WINDCHANGE;
+   return EVENTWINDCHANGE;
 }
 
 std::string EventWindChange::getEventToString() {
    std::stringstream ss;
    ss << Event::getEventToString();
-   ss << "Vento alterado para " << Direction::toString(direction);
+   ss << "Vento alterado para " << Direction::toString(direction) << "\n";
    return ss.str();
 }

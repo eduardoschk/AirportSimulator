@@ -1,5 +1,4 @@
 add_subdirectory(domain)
-add_subdirectory(util)
 if(NOT ${BuildTests})
 	add_subdirectory(app)
 endif()
