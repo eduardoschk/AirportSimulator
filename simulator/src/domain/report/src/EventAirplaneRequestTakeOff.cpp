@@ -1,19 +1,22 @@
+#include <sstream>
 #include "EventAirplaneRequestTakeOff.h"
 
-EventAirplaneRequestTakeOff::~EventAirplaneRequestTakeOff() {}
-
-EventAirplaneRequestTakeOff::EventAirplaneRequestTakeOff(long time, std::string _airplaneName) : Event(time) {
+EventAirplaneRequestTakeOff::EventAirplaneRequestTakeOff(long time, std::string _airplaneName) : Event(time) 
+{
    airplaneName= _airplaneName;
 }
 
+///////////////////////////////////////////////////////////////////////////////
 
-EVENTTYPE EventAirplaneRequestTakeOff::getTypeEvent() {
-   return EVENTAIRPLANEREQUESTTAKEOFF;
+EVENTTYPE EventAirplaneRequestTakeOff::getTypeEvent() 
+{
+   return EVENT_AIRPLANE_REQUEST_TAKE_OFF;
 }
 
-std::string EventAirplaneRequestTakeOff::getEventToString() {
+std::string EventAirplaneRequestTakeOff::getEventToString() 
+{
    std::stringstream ss;
-   ss << Event::getEventToString();
-   ss << "Avião " << airplaneName << " está solicitando decolagem \n";
+   ss << Event::getEventToString()
+      << "Avião " << airplaneName << " está solicitando decolagem \n";
    return ss.str();
 }

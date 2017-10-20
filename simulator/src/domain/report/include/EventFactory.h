@@ -1,10 +1,9 @@
 #pragma once
 
-#ifndef EVENT_FACTORY_H
-#define EVENT_FACTORY_H
+#ifndef INCLUDED_EVENT_FACTORY_H
+#define INCLUDED_EVENT_FACTORY_H
 
 #include "Event.h"
-#include <exception>
 
 class MyTimer;
 
@@ -12,8 +11,6 @@ class EventFactory
 {
 private:
    MyTimer* timer;
-
-   class EventCreateError : public std::exception { virtual const char* what() const { return "Erro ao criar evento"; }  };
 
    Event* makeCapacityMoreThanSeventy();
    Event* makeRequestsTakeOffMoreThanFive();
@@ -30,10 +27,10 @@ private:
    std::string getStringByArg(void* arg);
 
 public:
-   ~EventFactory();
+   ~EventFactory() {}
    EventFactory();
    
    Event* makeEvent(EVENTTYPE type, void* arg);
 };
 
-#endif
+#endif // INCLUDED_

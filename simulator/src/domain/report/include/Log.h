@@ -1,18 +1,20 @@
 #pragma once
 
-#ifndef LOG_H
-#define LOG_H
+#ifndef INCLUDED_LOG_H
+#define INCLUDED_LOG_H
 
 #include "Event.h"
 #include <deque>
 
 class EventFactory;
+class ReportController;
 
 class Log 
 {
 private:
-   EventFactory *eventFactory;
+   EventFactory* eventFactory;
    std::deque<Event*> events;
+   ReportController* monitor;
 
    static Log* instance;
 
@@ -21,9 +23,13 @@ public:
    Log();
 
    void registryEvent(EVENTTYPE type, void* arg);
+
    std::deque<Event*> getEvents() { return events; }
+
+   void initMonitoring(ReportController* controller);
+   void stopMonitoring();
 
    static Log* getInstance();
 };
 
-#endif // LOG_H
+#endif // INCLUDED_LOG_H

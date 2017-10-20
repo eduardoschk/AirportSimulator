@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef WIND_CONTROLLER_H
-#define WIND_CONTROLLER_H
+#ifndef INCLUDED_WIND_CONTROLLER_H
+#define INCLUDED_WIND_CONTROLLER_H
 
 #include "Observer.h"
 
@@ -17,8 +17,8 @@ private:
    MyTimer* timer;
    WindMonitoring* windMonitoring;
 
-   void calculateTimeWindChange();
    void changeWind();
+   void calculateTimeWindChange();
 
 public:
    ~WindController();
@@ -27,4 +27,4 @@ public:
    void updateTime(const long time);
 };
 
-#endif //WIND_CONTROLLER_H
+#endif // INCLUDED_WIND_CONTROLLER_H

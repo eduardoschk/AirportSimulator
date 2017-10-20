@@ -1,20 +1,30 @@
 #include "Log.h"
+#include "ReportController.h"
 #include "EventFactory.h"
-#include <iostream>
 
 Log::~Log() {
    delete eventFactory;
    for (int i= 0 ; i < events.size() ; ++i)
       delete events[i];
    instance= nullptr;
+   monitor= nullptr;
 }
 
-Log::Log() : eventFactory(new EventFactory()) {}
+Log::Log() : eventFactory(new EventFactory()), monitor(nullptr) {}
+
+///////////////////////////////////////////////////////////////////////////////
 
 void Log::registryEvent(EVENTTYPE type, void* arg) {
    Event* newEvent= eventFactory->makeEvent(type, arg);
-   std::cout << newEvent->getEventToString();
+   if (monitor) 
+      monitor->newEvent(newEvent);
    events.push_back(newEvent);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void Log::initMonitoring(ReportController* controller) {
+   monitor= controller;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

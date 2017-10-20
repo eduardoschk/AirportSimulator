@@ -1,10 +1,6 @@
 #include "WindFactory.h"
 #include "Wind.h"
 
-WindFactory::WindFactory() {}
-
-WindFactory::~WindFactory() {}
-
 Wind* WindFactory::makeWindStatus(const double degreeWind) 
 {
    if (degreeWind < 0 || degreeWind > 360) 

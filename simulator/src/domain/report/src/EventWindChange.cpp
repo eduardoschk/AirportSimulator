@@ -1,20 +1,22 @@
-#include "EventWindChange.h"
 #include <sstream>
-#include "MyTimer.h"
+#include "EventWindChange.h"
 
-EventWindChange::~EventWindChange() {}
-
-EventWindChange::EventWindChange(long time, Direction::DIRECTIONS newDirection) : Event(time) {
+EventWindChange::EventWindChange(long time,  std::string newDirection) : Event(time) 
+{
    direction= newDirection;
 }
 
-EVENTTYPE EventWindChange::getTypeEvent() {
-   return EVENTWINDCHANGE;
+///////////////////////////////////////////////////////////////////////////////
+
+EVENTTYPE EventWindChange::getTypeEvent() 
+{
+   return EVENT_WIND_CHANGE;
 }
 
-std::string EventWindChange::getEventToString() {
+std::string EventWindChange::getEventToString() 
+{
    std::stringstream ss;
-   ss << Event::getEventToString();
-   ss << "Vento alterado para " << Direction::toString(direction) << "\n";
+   ss << Event::getEventToString()
+      << "Vento alterado para " << direction << "\n";
    return ss.str();
 }

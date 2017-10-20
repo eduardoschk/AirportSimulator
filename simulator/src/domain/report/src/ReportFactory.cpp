@@ -1,18 +1,20 @@
+#include "ReportWind.h"
 #include "ReportFactory.h"
 #include "ReportAirplanes.h"
-#include "ReportAirplanesOnGround.h"
-#include "ReportAirplanesWaiting.h"
-#include "ReportCriticalSituation.h"
 #include "ReportPassengers.h"
-#include "ReportWind.h"
+#include "ReportAirplanesWaiting.h"
+#include "ReportAirplanesOnGround.h"
+#include "ReportCriticalSituation.h"
 
-Report* ReportFactory::makeReport(REPORTTYPE type) {
-   switch (type) {
-   case AIRPLANESLANDING:     return new ReportAirplanes();
-   case AIRPLANESONGROUND:    return new ReportAirplanesOnGround();
-   case AIRPLANESWAITING:     return new ReportAirplanesWaiting();
-   case CRITICALSITUATION:    return new ReportCriticalSituation();
-   case PASSENGERS:           return new ReportPassengers();
-   case WIND:                 return new ReportWind();
+Report* ReportFactory::makeReport(REPORTTYPE type) 
+{
+   switch (type) 
+   {
+   case REPORT_AIRPLANES_LANDING:    return new ReportAirplanes();
+   case REPORT_AIRPLANES_ON_GROUND:  return new ReportAirplanesOnGround();
+   case REPORT_AIRPLANES_WAITING:    return new ReportAirplanesWaiting();
+   case REPORT_CRITICAL_SITUATION:   return new ReportCriticalSituation();
+   case REPORT_PASSENGERS:           return new ReportPassengers();
+   case REPORT_WIND:                 return new ReportWind();
    }
 }

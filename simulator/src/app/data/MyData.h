@@ -1,14 +1,12 @@
 #pragma once
+#ifndef INCLUDED_DATA_H
+#define INCLUDED_DATA_H
 
-#ifndef DATA_H
-#define DATA_H
-
-#include "TowerOfControlController.h"
-#include "MyTimer.h"
-#include "ReportController.h"
-
-class AirplaneController;
+class MyTimer;
 class WindController;
+class ReportController;
+class AirplaneController;
+class TowerOfControlController;
 
 class MyData {
 private:
@@ -22,12 +20,12 @@ public:
    ~MyData();
    MyData();
 
-   MyTimer* getTimer();
-   WindController* getWindController();
-   ReportController* getReportController();
-   AirplaneController* getAirplaneController();
-   TowerOfControlController* getControllerTowerOfControl();
+   MyTimer& getTimer();
+   WindController& getWindController();
+   ReportController& getReportController();
+   AirplaneController& getAirplaneController();
+   TowerOfControlController& getControllerTowerOfControl();
 
 };
 
-#endif //DATA_H
+#endif //INCLUDED_DATA_H

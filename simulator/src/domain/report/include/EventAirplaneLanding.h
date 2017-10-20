@@ -1,10 +1,9 @@
 #pragma once
 
-#ifndef EVENT_AIRPLANE_LANDING_H
-#define EVENT_AIRPLANE_LANDING_H
+#ifndef INCLUDED_EVENT_AIRPLANE_LANDING_H
+#define INCLUDED_EVENT_AIRPLANE_LANDING_H
 
 #include "event.h"
-#include <string>
 
 class EventAirplaneLanding :
    public Event
@@ -14,13 +13,13 @@ private:
    int passengers;
 
 public:
-   ~EventAirplaneLanding();
+   ~EventAirplaneLanding() {}
    EventAirplaneLanding(long time, std::string _airplaneName, int nPassengers);
 
    EVENTTYPE getTypeEvent();
-   std::string getEventToString();
-   std::string getAirplaneName();
    int getCountPassengers();
+   std::string getAirplaneName();
+   std::string getEventToString();
 };
 
-#endif // EVENT_AIRPLANE_LANDING_H
+#endif // INCLUDED_EVENT_AIRPLANE_LANDING_H

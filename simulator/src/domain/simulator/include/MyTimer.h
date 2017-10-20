@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef MY_TIMER_H
-#define MY_TIMER_H
+#ifndef INCLUDED_MY_TIMER_H
+#define INCLUDED_MY_TIMER_H
 
 #include <deque>
 #include "Subject.h"
@@ -12,12 +12,16 @@ class MyTimer :
    public Subject
 {
 private:
-   std::deque<Observer*> observers;
    time_t initialTimer;
+   long timeForStopwatching;
+   std::deque<Observer*> observers;
 
    typedef std::deque<Observer*>::iterator ObserversIterator;
 
    static MyTimer* instance;
+
+   void notifyAll();
+   void notifyEnd();
 
    MyTimer() {}
 
@@ -26,11 +30,15 @@ public:
 
    static long getActualTime();
    static void sleep(const int seconds);
-   void startStopwatch(const long limit);
 
-   void add(Observer* observer);
-   void remove(Observer* observer);
-   void notifyAll();
+   void startStopwatch();
+
+   
+   void addObserver(Observer* observer);
+   void removeObserver(Observer* observer);
+
+   long getTimeLimit();
+   void setTimeLimit(const long limit);
 
    time_t getInitialTimer();
 
@@ -39,4 +47,4 @@ public:
    static MyTimer* getTimer();
 };
 
-#endif // MY_TIMER_H
+#endif // INCLUDED_MY_TIMER_H

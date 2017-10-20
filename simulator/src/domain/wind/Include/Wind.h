@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef WIND_H
-#define WIND_H
+#ifndef INCLUDED_WIND_H
+#define INCLUDED_WIND_H
 
 #include "Direction.h"
 
@@ -61,4 +61,4 @@ class NortheastWind : public Wind {
    }
 };
 
-#endif // WIND_H
+#endif // INCLUDED_WIND_H

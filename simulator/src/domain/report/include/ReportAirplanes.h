@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef REPORT_AIRPLANE_H
-#define REPORT_AIRPLANE_H
+#ifndef INCLUDED_REPORT_AIRPLANE_H
+#define INCLUDED_REPORT_AIRPLANE_H
 
 #include "Report.h"
 
@@ -9,10 +9,10 @@ class ReportAirplanes :
    public Report
 {
 public:
-   ~ReportAirplanes();
-   ReportAirplanes();
+   ~ReportAirplanes() {}
+   ReportAirplanes() {}
 
    std::string generatingReport();
 };
 
-#endif // REPORT_AIRPLANE_H
+#endif // INCLUDED_REPORT_AIRPLANE_H

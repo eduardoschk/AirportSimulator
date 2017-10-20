@@ -1,13 +1,19 @@
+#include <sstream>
 #include "EventCapacityMoreThanSeventy.h"
 
 EventCapacityMoreThanSeventy::EventCapacityMoreThanSeventy(long time) : Event(time) {}
 
-EventCapacityMoreThanSeventy::~EventCapacityMoreThanSeventy(void) {}
+///////////////////////////////////////////////////////////////////////////////
 
-EVENTTYPE EventCapacityMoreThanSeventy::getTypeEvent() {
-   return EVENTCAPACITYMORETHANSEVENTY;
+EVENTTYPE EventCapacityMoreThanSeventy::getTypeEvent() 
+{
+   return EVENT_CAPACITY_MORE_THAN_SEVENTY;
 }
 
-std::string EventCapacityMoreThanSeventy::getEventToString() {
-   return "Capacidade de aviões em solo do aeroporto atingida";
+std::string EventCapacityMoreThanSeventy::getEventToString() 
+{
+   std::stringstream ss;
+   ss << Event::getEventToString()
+      << "Capacidade de aviões em solo do aeroporto atingida \n";
+   return ss.str();
 }

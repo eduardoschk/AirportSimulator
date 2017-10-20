@@ -1,18 +1,17 @@
-#include "ReportCriticalSituation.h"
+#include <sstream>
 #include "Log.h"
+#include "ReportCriticalSituation.h"
 
-ReportCriticalSituation::ReportCriticalSituation() {}
-
-ReportCriticalSituation::~ReportCriticalSituation() {}
-
-std::string ReportCriticalSituation::generatingReport() {
+std::string ReportCriticalSituation::generatingReport() 
+{
    std::stringstream ss;
    std::deque<Event*> events= Log::getInstance()->getEvents();
 
    ss << "Situações Criticas \n";
-   for (std::deque<Event*>::iterator iter= events.begin() ; iter != events.end() ; ++iter) {
+   for (std::deque<Event*>::iterator iter= events.begin() ; iter != events.end() ; ++iter) 
+   {
       Event* e= dynamic_cast<Event*>(*iter);
-      if (e->getTypeEvent() == EVENTREQUESTSTAKEOFFMORETHANFIVE || e->getTypeEvent() == EVENTAIRPLANECHANGEAIRPORT || e->getTypeEvent() == EVENTAIRPLANESWAITINGMORETHANFIVE || e->getTypeEvent() == EVENTCAPACITYMORETHANSEVENTY)
+      if (e->getTypeEvent() == EVENT_REQUESTS_TAKE_OFF_MORE_THAN_FIVE || e->getTypeEvent() == EVENT_AIRPLANE_CHANGE_AIRPORT || e->getTypeEvent() == EVENT_AIRPLANES_WAITING_MORE_THAN_FIVE || e->getTypeEvent() == EVENT_CAPACITY_MORE_THAN_SEVENTY)
          ss << e->getEventToString();
    }
    

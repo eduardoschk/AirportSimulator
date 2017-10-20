@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef EVENT_RUN_WAY_RETURNS_FREE_H
-#define EVENT_RUN_WAY_RETURNS_FREE_H
+#ifndef INCLUDED_EVENT_RUN_WAY_RETURNS_FREE_H
+#define INCLUDED_EVENT_RUN_WAY_RETURNS_FREE_H
 
 #include "event.h"
 
@@ -11,11 +11,11 @@ class EventRunWayReturnFree :
 private:
    std::string runWay;
 public:
-   ~EventRunWayReturnFree();
+   ~EventRunWayReturnFree() {}
    EventRunWayReturnFree(long time, std::string idRunWay);
 
-   virtual EVENTTYPE getTypeEvent();
-   virtual std::string getEventToString();
+   EVENTTYPE getTypeEvent();
+   std::string getEventToString();
 };
 
-#endif // EVENT_RUN_WAY_RETURNS_FREE_H
+#endif // INCLUDED_EVENT_RUN_WAY_RETURNS_FREE_H

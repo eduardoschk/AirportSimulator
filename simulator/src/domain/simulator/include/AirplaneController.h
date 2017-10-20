@@ -1,32 +1,32 @@
 #pragma once
 
-#ifndef AIRPLANE_CONTROLLER_H
-#define AIRPLANE_CONTROLLER_H
+#ifndef INCLUDED_AIRPLANE_CONTROLLER_H
+#define INCLUDED_AIRPLANE_CONTROLLER_H
 
 #include <deque>
 #include "Observer.h"
 
 class Airplane;
 class MyTimer;
-class Log;
 
 class AirplaneController :
    public Observer
 {
 private:
-   std::deque<Airplane*> airplanes;
-
-   long timeToNewAirplane;
    MyTimer* timer;
-
-   Log* log;
+   long timeToNewAirplane;
+   std::deque<Airplane*> airplanes;   
 
    void generateAirplane();
    void calculateTimeNewAirplane();
+
    void checkUpdateInAirplanesGenerated();
-   bool checkAirplaneHasAlreadyLanded(Airplane* airplane);
-   bool checkAirplaneReadyToNextFlight(Airplane* airplane);
-   bool checkTimeOutToAirportResponseRequest(Airplane* airplane);
+   bool checkAirplaneHasAlreadyLanded(Airplane& airplane);
+   bool checkAirplaneReadyToNextFlight(Airplane& airplane);
+   bool checkTimeOutToAirportResponseRequest(Airplane& airplane);
+
+   void timeOutRequestAirplane(Airplane& airplane);
+   void airplaneReadyToTakeOff(Airplane& airplane);
 
 public:
    ~AirplaneController();
@@ -35,4 +35,4 @@ public:
    void updateTime(const long time);
 };
 
-#endif //AIRPLANE_CONTROLLER_H
+#endif // INCLUDED_AIRPLANE_CONTROLLER_H

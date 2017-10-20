@@ -6,13 +6,16 @@
 std::string generateCompanyName();
 std::string generateManufacturers();
 
-long MyRandom::generateRandomValueBetween(const int min, const int max)
+long MyRandom::generateRandomValueBetween(int min, int max)
 {
-   srand(time(NULL));
-   return rand()%(max-min + 1) + min;
+   srand( time(NULL) );
+   return rand() % (max - min + 1) + min;
 }
 
-std::string MyRandom::generateNameAirplane() {
+///////////////////////////////////////////////////////////////////////////////
+
+std::string MyRandom::generateNameAirplane() 
+{
    std::stringstream ss;
    ss << generateCompanyName() << " - " << generateManufacturers() << " " << MyRandom::generateRandomValueBetween(600, 800);
    return ss.str();

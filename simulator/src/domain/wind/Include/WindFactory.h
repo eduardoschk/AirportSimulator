@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef WIND_FACTORY_H
-#define WIND_FACTORY_H
+#ifndef INCLUDED_WIND_FACTORY_H
+#define INCLUDED_WIND_FACTORY_H
 
 #include <exception>  
 class Wind;
@@ -15,10 +15,10 @@ public:
       }
    };   
 
-   ~WindFactory();
-   WindFactory();
+   ~WindFactory() {}
+   WindFactory() {}
 
    Wind* makeWindStatus(const double degreeWind) throw(DegreeWindException);
 };
 
-#endif // WIND_FACTORY_H
+#endif // INCLUDED_WIND_FACTORY_H

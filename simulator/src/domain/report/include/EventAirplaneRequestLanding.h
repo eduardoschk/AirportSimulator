@@ -1,10 +1,9 @@
 #pragma once
 
-#ifndef EVENT_AIRPLANE_REQUEST_LANDING_H
-#define EVENT_AIRPLANE_REQUEST_LANDING_H
+#ifndef INCLUDED_EVENT_AIRPLANE_REQUEST_LANDING_H
+#define INCLUDED_EVENT_AIRPLANE_REQUEST_LANDING_H
 
 #include "event.h"
-#include <string>
 
 class EventAirplaneRequestLanding :
    public Event
@@ -12,11 +11,11 @@ class EventAirplaneRequestLanding :
 private:
    std::string airplaneName;
 public:
-   ~EventAirplaneRequestLanding();
+   ~EventAirplaneRequestLanding() {}
    EventAirplaneRequestLanding(long time, std::string _airplaneName);
 
    EVENTTYPE getTypeEvent();
    std::string getEventToString();
 };
 
-#endif // EVENT_AIRPLANE_REQUEST_LANDING_H
+#endif // INCLUDED_EVENT_AIRPLANE_REQUEST_LANDING_H

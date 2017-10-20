@@ -1,10 +1,10 @@
 #pragma once
 
-#ifndef RUNWAY_H
-#define RUNWAY_H
+#ifndef INCLUDED_RUNWAY_H
+#define INCLUDED_RUNWAY_H
 
-#include "Direction.h"
 #include "Observer.h"
+#include "Direction.h"
 
 class Log;
 class MyTimer;
@@ -27,11 +27,11 @@ public:
    RunWay(const Direction::DIRECTIONS _directionRunWay);
 
    bool isAvailable();
-   Direction::DIRECTIONS getDirectionRunWay() { return directionRunWay; }
-   void runwayPutToUse();
+   void runwaySetToUse();
 
+   Direction::DIRECTIONS getDirectionRunWay();
+   
    void updateTime(long time);
-
 };
 
-#endif //RUNWAY_H
+#endif //INCLUDED_RUNWAY_H

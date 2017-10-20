@@ -1,8 +1,7 @@
 #pragma once
-#ifndef APP_H
-#define APP_H
 
-#include "TowerOfControl.h"
+#ifndef INCLUDED_APP_H
+#define INCLUDED_APP_H
 
 class UserInterface;
 class MyData;
@@ -15,13 +14,18 @@ private:
    UserInterface* ui;
    Command* currentCmd;
 
+   void runApp();
+   void initAirport();
+
+   bool executeCmd();
+   void cleanCurrentCmd();
+   bool createCmd(int menuOption);
+
 public:
-   ~App() {}
+   ~App();
    App();
 
    void run();
-   void runApp();
-   void runAirport();
 };
 
-#endif // APP_H
+#endif // INCLUDED_APP_H

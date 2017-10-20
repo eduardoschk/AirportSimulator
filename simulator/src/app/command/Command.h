@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef COMMAND_H
-#define COMMAND_H
+#ifndef INCLUDED_COMMAND_H
+#define INCLUDED_COMMAND_H
 
 class MyData;
 class UserInterface;
@@ -14,4 +14,4 @@ public:
    virtual void execute(MyData& data, UserInterface& ui) = 0;
 };
 
-#endif // COMMAND_H
+#endif // INCLUDED_COMMAND_H

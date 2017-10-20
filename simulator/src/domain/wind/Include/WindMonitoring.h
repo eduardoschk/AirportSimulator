@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef WIND_MONITORING_H
-#define WIND_MONITORING_H
+#ifndef INCLUDED_WIND_MONITORING_H
+#define INCLUDED_WIND_MONITORING_H
 
 #include "Wind.h"
 
@@ -25,11 +25,10 @@ public:
    ~WindMonitoring();
 
    void directionWindChange(double degree);
-   Wind* getActualWind();
 
-   long getTimeChageOcurred();
+   Wind& getActualWind();
 
    static WindMonitoring* getInstance();
 };
 
-#endif // WIND_MONITORING_H
+#endif // INCLUDED_WIND_MONITORING_H

@@ -1,6 +1,7 @@
 #pragma once
-#ifndef DIRECTION_H
-#define DIRECTION_H
+
+#ifndef INCLUDED_DIRECTION_H
+#define INCLUDED_DIRECTION_H
 
 #include <string>
 
@@ -11,4 +12,4 @@ namespace Direction {
    std::string toString(DIRECTIONS direction); 
 };
 
-#endif // DIRECTION_H
+#endif // INCLUDED_DIRECTION_H

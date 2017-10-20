@@ -1,7 +1,8 @@
 #pragma once
 
-#ifndef REPORT_PASSENGERS_H
-#define REPORT_PASSENGERS_H
+#ifndef INCLUDED_REPORT_PASSENGERS_H
+#define INCLUDED_REPORT_PASSENGERS_H
+
 #include "Report.h"
 
 class ReportPassengers :
@@ -14,4 +15,4 @@ public:
    std::string generatingReport();
 };
 
-#endif // REPORT_PASSENGERS_H
+#endif // INCLUDED_REPORT_PASSENGERS_H

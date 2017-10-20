@@ -1,17 +1,16 @@
-#include "ReportAirplanes.h"
+#include <sstream>
 #include "Log.h"
+#include "ReportAirplanes.h"
 
-ReportAirplanes::~ReportAirplanes() {}
-
-ReportAirplanes::ReportAirplanes() {}
-
-std::string ReportAirplanes::generatingReport() {
+std::string ReportAirplanes::generatingReport() 
+{
    std::stringstream ss;
    int countingLandings= 0;
    std::deque<Event*> events= Log::getInstance()->getEvents();
 
-   for(std::deque<Event*>::iterator i= events.begin(); i != events.end(); ++i) {
-      if ((dynamic_cast<Event*>(*i))->getTypeEvent() == EVENTAIRPLANELANDING )
+   for(std::deque<Event*>::iterator i= events.begin(); i != events.end(); ++i) 
+   {
+      if ((dynamic_cast<Event*>(*i))->getTypeEvent() == EVENT_AIRPLANE_LANDING )
          ++countingLandings;
    }
 

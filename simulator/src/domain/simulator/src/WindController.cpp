@@ -1,34 +1,37 @@
-#include "WindController.h"
-#include "WindMonitoring.h"
 #include "MyTimer.h"
 #include "MyRandom.h"
+#include "WindController.h"
+#include "WindMonitoring.h"
 
-//Para testes
-#include <iostream>
-#include "Direction.h"
-
-WindController::WindController() : timer(MyTimer::getTimer()), windMonitoring(WindMonitoring::getInstance()) {
+WindController::WindController() : timer(MyTimer::getTimer()), windMonitoring(WindMonitoring::getInstance()) 
+{
    calculateTimeWindChange();
-   timer->add(this);
+   timer->addObserver(this);
 }
 
-WindController::~WindController() {
+WindController::~WindController() 
+{
    delete windMonitoring;
-   timer->remove(this);
+   timer->removeObserver(this);
 }
 
+///////////////////////////////////////////////////////////////////////////////
 
-void WindController::changeWind() {
+void WindController::changeWind() 
+{
    windMonitoring->directionWindChange( MyRandom::generateRandomValueBetween(0, 36) * 10 ); 
    calculateTimeWindChange();
 }
 
-void WindController::updateTime(const long time) {
-   if (time >= timeToChangeWind) {
-      changeWind();
-   }
+void WindController::calculateTimeWindChange() 
+{
+   timeToChangeWind= timer->getActualTime() + MyRandom::generateRandomValueBetween(4, 10);
 }
 
-void WindController::calculateTimeWindChange() {
-   timeToChangeWind= timer->getActualTime() + MyRandom::generateRandomValueBetween(4, 10);
+///////////////////////////////////////////////////////////////////////////////
+
+void WindController::updateTime(const long time) 
+{
+   if (time >= timeToChangeWind) 
+      changeWind();
 }

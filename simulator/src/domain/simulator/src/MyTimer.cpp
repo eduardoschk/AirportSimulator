@@ -1,58 +1,85 @@
-#include "MyTimer.h"
 #include <time.h>
-#include <iostream>
-#include "Observer.h"
 #include <string>
+#include <iostream>
+#include "MyTimer.h"
+#include "Observer.h"
+#include "Log.h"
 
-MyTimer::~MyTimer() {
+
+MyTimer::~MyTimer() 
+{
    observers.clear();
    instance= nullptr;
 }
 
-
-long MyTimer::getActualTime() {
+long MyTimer::getActualTime() 
+{
    time_t t;
    return time(&t); 
 }
 
-void MyTimer::sleep(const int seconds) {
+void MyTimer::sleep(const int seconds) 
+{
    time_t start, actualTime;
    time(&start);
-   for(time(&actualTime); actualTime < start + seconds; time(&actualTime)) {}
+   for( time(&actualTime) ; actualTime < start + seconds ; time(&actualTime) ) {}
 }
 
-void MyTimer::startStopwatch(const long limit) {
+void MyTimer::startStopwatch() 
+{
    time(&initialTimer);
-   time_t timeOut= initialTimer + limit;
+   time_t timeOut= initialTimer + timeForStopwatching;
    
    for (time_t actualTime= MyTimer::getActualTime() ; actualTime <= timeOut ; sleep(1), time(&actualTime))
       notifyAll();
-   std::cout << "Finalizando simulação" << std::endl;
 }
 
-void MyTimer::add(Observer* observer) {
+///////////////////////////////////////////////////////////////////////////////
+
+void MyTimer::addObserver(Observer* observer) 
+{
    observers.push_back(observer);
 }
 
-void MyTimer::remove(Observer* observer) {
-   for (ObserversIterator iterator = observers.begin() ; iterator != observers.end() ; ++iterator) {
-      if ((*iterator) == observer) {
+void MyTimer::removeObserver(Observer* observer) 
+{
+   for (ObserversIterator iterator = observers.begin() ; iterator != observers.end() ; ++iterator) 
+   {
+      if ((*iterator) == observer) 
+      {
          observers.erase(iterator);
          break;
       }
    }
 }
 
-void MyTimer::notifyAll() {
+///////////////////////////////////////////////////////////////////////////////
+
+void MyTimer::notifyAll() 
+{
    for (ObserversIterator iterator = observers.begin() ; iterator != observers.end() ; ++iterator)
       (*iterator)->updateTime(MyTimer::getActualTime());
 }
 
-time_t MyTimer::getInitialTimer() {
+///////////////////////////////////////////////////////////////////////////////
+
+void MyTimer::setTimeLimit(long limit) 
+{
+   timeForStopwatching= limit;
+}
+
+long MyTimer::getTimeLimit() 
+{
+   return timeForStopwatching;
+}
+
+time_t MyTimer::getInitialTimer() 
+{
    return initialTimer;
 }
 
-std::string MyTimer::getDateOnTimestamp(const time_t time) {
+std::string MyTimer::getDateOnTimestamp(const time_t time) 
+{
    time_t initialTimer;
 
    if (instance->getInitialTimer() > 0) 
@@ -74,7 +101,8 @@ std::string MyTimer::getDateOnTimestamp(const time_t time) {
 
 MyTimer* MyTimer::instance= nullptr;
 
-MyTimer* MyTimer::getTimer() {
+MyTimer* MyTimer::getTimer() 
+{
    if (!instance)
       instance= new MyTimer();
    return instance;

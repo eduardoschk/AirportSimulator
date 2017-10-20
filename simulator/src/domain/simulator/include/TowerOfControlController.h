@@ -1,6 +1,6 @@
 #pragma once
-#ifndef CONTROLLER_TOWER_OF_CONTROL_H
-#define CONTROLLER_TOWER_OF_CONTROL_H
+#ifndef INCLUDED_CONTROLLER_TOWER_OF_CONTROL_H
+#define INCLUDED_CONTROLLER_TOWER_OF_CONTROL_H
 
 #include "Observer.h"
 
@@ -19,7 +19,8 @@ public:
    TowerOfControlController();
 
    void setLimitAirplanes(int limit);
+
    void updateTime(const long time);
 };
 
-#endif // CONTROLLER_TOWER_OF_CONTROL_H
+#endif // INCLUDED_CONTROLLER_TOWER_OF_CONTROL_H

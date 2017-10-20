@@ -13,66 +13,80 @@
 #include "EventCapacityMoreThanSeventy.h"
 #include "EventAirplaneWaitingMoreThanFive.h"
 
-EventFactory::~EventFactory() {}
-
 EventFactory::EventFactory() : timer(MyTimer::getTimer()) {}
 
-Event* EventFactory::makeEvent(EVENTTYPE type, void* arg) {
-   switch(type) {
-   case EVENTWINDCHANGE:                     return makeChangeWindEvent(arg);
-   case EVENTAIRPLANELANDING:                return makeAirplaneLandingEvent(arg);
-   case EVENTAIRPLANECHANGEAIRPORT:          return makeAirplaneChangeAirportEvent(arg);
-   case EVENTAIRPLANEREQUESTLANDING:         return makeAirplaneRequestAirportEvent(arg);
-   case EVENTAIRPLANEREQUESTTAKEOFF:         return makeAirplaneRequestTakeOffEvent(arg);
-   case EVENTAIRPLANETAKEOFF:                return makeAirplaneTakeOffdEvent(arg);
-   case EVENTRUNWAYFREE:                     return makeRunWayFreeEvent(arg);
-   case EVENTAIRPLANESWAITINGMORETHANFIVE:   return makeAirplanesWaitingMoreThanFive();
-   case EVENTCAPACITYMORETHANSEVENTY:        return makeCapacityMoreThanSeventy();
-   case EVENTREQUESTSTAKEOFFMORETHANFIVE:    return makeRequestsTakeOffMoreThanFive();
-   default:                                  throw EventCreateError();
+///////////////////////////////////////////////////////////////////////////////
+
+Event* EventFactory::makeEvent(EVENTTYPE type, void* arg) 
+{
+   switch(type) 
+   {
+   case EVENT_WIND_CHANGE:                         return makeChangeWindEvent(arg);
+   case EVENT_AIRPLANE_LANDING:                    return makeAirplaneLandingEvent(arg);
+   case EVENT_AIRPLANE_CHANGE_AIRPORT:             return makeAirplaneChangeAirportEvent(arg);
+   case EVENT_AIRPLANE_REQUEST_LANDING:            return makeAirplaneRequestAirportEvent(arg);
+   case EVENT_AIRPLANE_REQUEST_TAKE_OFF:           return makeAirplaneRequestTakeOffEvent(arg);
+   case EVENT_AIRPLANE_TAKE_OFF:                   return makeAirplaneTakeOffdEvent(arg);
+   case EVENT_RUN_WAY_FREE:                        return makeRunWayFreeEvent(arg);
+   case EVENT_AIRPLANES_WAITING_MORE_THAN_FIVE:    return makeAirplanesWaitingMoreThanFive();
+   case EVENT_CAPACITY_MORE_THAN_SEVENTY:          return makeCapacityMoreThanSeventy();
+   case EVENT_REQUESTS_TAKE_OFF_MORE_THAN_FIVE:    return makeRequestsTakeOffMoreThanFive();
    }
 }
 
-Event* EventFactory::makeChangeWindEvent(void* arg) {
-   return new EventWindChange(timer->getActualTime(), ((Wind*)arg)->getDirectionWind());
+Event* EventFactory::makeChangeWindEvent(void* arg) 
+{
+   return new EventWindChange(timer->getActualTime(), Direction::toString(((Wind*)arg)->getDirectionWind()));
 }
 
-Event* EventFactory::makeAirplaneRequestAirportEvent(void* arg) {
+Event* EventFactory::makeAirplaneRequestAirportEvent(void* arg) 
+{
    return new EventAirplaneRequestLanding(timer->getActualTime(), getStringByArg(arg));
 }
 
-Event* EventFactory::makeAirplaneChangeAirportEvent(void* arg) {
+Event* EventFactory::makeAirplaneChangeAirportEvent(void* arg) 
+{
    return new EventAirplaneChangeAirport(timer->getActualTime(), getStringByArg(arg));
 }
 
-Event* EventFactory::makeRequestsTakeOffMoreThanFive() {
+Event* EventFactory::makeRequestsTakeOffMoreThanFive() 
+{
    return new EventRequestsToTakeOffMoreThanFive(timer->getActualTime());
 }
 
-Event* EventFactory::makeAirplaneRequestTakeOffEvent(void* arg) {
+Event* EventFactory::makeAirplaneRequestTakeOffEvent(void* arg) 
+{
    return new EventAirplaneRequestTakeOff(timer->getActualTime(), getStringByArg(arg));
 }
 
-Event* EventFactory::makeAirplanesWaitingMoreThanFive() {
+Event* EventFactory::makeAirplanesWaitingMoreThanFive() 
+{
    return new EventAirplaneWaitingMoreThanFive(timer->getActualTime());
 }
 
-Event* EventFactory::makeAirplaneTakeOffdEvent(void* arg) {
+Event* EventFactory::makeAirplaneTakeOffdEvent(void* arg) 
+{
    return new EventAirplaneTakeOff(timer->getActualTime(), ((Airplane*)arg)->getName(), ((Airplane*)arg)->getCountPassengers());
 }
 
-Event* EventFactory::makeRunWayFreeEvent(void* arg) {
+Event* EventFactory::makeRunWayFreeEvent(void* arg) 
+{
    return new EventRunWayReturnFree(timer->getActualTime(), getStringByArg(arg));
 }
 
-Event* EventFactory::makeAirplaneLandingEvent(void* arg) {
+Event* EventFactory::makeAirplaneLandingEvent(void* arg) 
+{
    return new EventAirplaneLanding(timer->getActualTime(), ((Airplane*)arg)->getName(), ((Airplane*)arg)->getCountPassengers());
 }
 
-Event* EventFactory::makeCapacityMoreThanSeventy() {
+Event* EventFactory::makeCapacityMoreThanSeventy() 
+{
    return new EventCapacityMoreThanSeventy(timer->getActualTime());
 }
 
-std::string EventFactory::getStringByArg(void* arg) {
+///////////////////////////////////////////////////////////////////////////////
+
+std::string EventFactory::getStringByArg(void* arg) 
+{
    return *(static_cast<std::string*>(arg));
 }

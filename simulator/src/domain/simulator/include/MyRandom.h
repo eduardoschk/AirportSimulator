@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef MY_RANDOM_H
-#define MY_RANDOM_H
+#ifndef INCLUDED_MY_RANDOM_H
+#define INCLUDED_MY_RANDOM_H
 
 #include <string>
 
@@ -11,8 +11,8 @@ private:
    ~MyRandom() {}
    MyRandom() {}
 public:
-   static long generateRandomValueBetween(const int min, const int max);
    static std::string generateNameAirplane();
+   static long generateRandomValueBetween(int min, int max);
 };
 
-#endif //MY_RANDOM_H
+#endif // INCLUDED_MY_RANDOM_H

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef AIRPLANE_H
-#define AIRPLANE_H
+#ifndef INCLUDED_AIRPLANE_H
+#define INCLUDED_AIRPLANE_H
 
 #include <string>
 
@@ -9,37 +9,42 @@ class TowerOfControl;
 class Airplane
 {
 private:
-   std::string name;
    int passengers;
+   std::string name;
    TowerOfControl* towerOfControl;
    
    long timeRequestLanding;
    long timeLimitResponseLandingRequest;
+
    long timeAllowdLanding;
    long timeToNextFlight;
 
 public:
    Airplane(std::string _name, int _passengers);
-   virtual ~Airplane();
+   virtual ~Airplane() {}
 
    void requestLandingToAirport();
    void requestTakeOffToAirport();
 
-   void allowedLanding(long actualTime, long _timeToNextFlight);
    void changedAirport();
+   void allowedLanding(long actualTime, long _timeToNextFlight);
    
    std::string getName();
-   int getCountPassengers();
-   long getTimeLimitResponseLandingRequest();
-   long getTimeAllowdLanding();
-   long getTimeToNextFlight();
-
    void setName(std::string newName);
+
+   int getCountPassengers();
    void setCountPassengers(int newCountPassangers);
+
+   long getTimeLimitResponseLandingRequest();
    void setTimeLimitResponseLandingRequest(long newTimeLimitResponseLandingRequest);
+   
+   long getTimeAllowdLanding();
    void setTimeAllowdLanding(long newTimeAllowedLanding);
+
+   long getTimeToNextFlight();
    void setTimeToNextFlight(long newTimeToNextFlight);
+
    long getTimeRequestLanding();
 };
 
-#endif //AIRPLANE_H
+#endif // INCLUDED_AIRPLANE_H

@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef REPORT_H
-#define REPORT_H
+#ifndef INCLUDED_REPORT_H
+#define INCLUDED_REPORT_H
 
 #include <string>
 
@@ -14,4 +14,4 @@ public:
    virtual std::string generatingReport() = 0;
 };
 
-#endif // REPORT_H
+#endif // INCLUDED_REPORT_H

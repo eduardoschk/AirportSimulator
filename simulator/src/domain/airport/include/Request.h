@@ -1,6 +1,6 @@
 #pragma once
-#ifndef REQUEST_H
-#define REQUEST_H
+#ifndef INCLUDED_REQUEST_H
+#define INCLUDED_REQUEST_H
 
 #include "Airplane.h"
 
@@ -11,25 +11,31 @@ protected:
 
 public:
    virtual~ Request() {}
+   Request() {}
 
-   enum TYPEREQUEST {LANDING, TAKEOFF};
+   enum TYPEREQUEST {REQUEST_LANDING, REQUEST_TAKEOFF};
 
    Airplane* getAirplane() { return airplane; }
+
    virtual TYPEREQUEST getTypeRequest() = 0;
    virtual std::string getStringTypeRequest() = 0;
 };
 
-class LandingRequest : public Request {
+class LandingRequest : 
+   public Request 
+{
 public:
    LandingRequest(Airplane* _airplane) {
       airplane= _airplane;
    }
    
-   TYPEREQUEST getTypeRequest() { return TYPEREQUEST::LANDING; }
    std::string getStringTypeRequest() { return "Pouso"; }
+   TYPEREQUEST getTypeRequest() { return TYPEREQUEST::REQUEST_LANDING; }
 };
 
-class TakeOffRequest : public Request {
+class TakeOffRequest : 
+   public Request 
+{
 public:
    ~TakeOffRequest() { 
       delete airplane;
@@ -38,8 +44,9 @@ public:
    TakeOffRequest(Airplane* _airplane) {
       airplane= _airplane;
    }
-   TYPEREQUEST getTypeRequest() { return TYPEREQUEST::TAKEOFF; }
+
    std::string getStringTypeRequest() { return "Decolagem"; }
+   TYPEREQUEST getTypeRequest() { return TYPEREQUEST::REQUEST_TAKEOFF; }
 };
 
-#endif //REQUEST_H
+#endif // INCLUDED_REQUEST_H

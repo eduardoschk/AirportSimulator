@@ -1,22 +1,21 @@
 #pragma once
 
-#ifndef EVENT_WIND_CHANGE_H
-#define EVENT_WIND_CHANGE_H
+#ifndef INCLUDED_EVENT_WIND_CHANGE_H
+#define INCLUDED_EVENT_WIND_CHANGE_H
 
 #include "event.h"
-#include "Direction.h"
 
 class EventWindChange :
    public Event
 {
 private:
-   Direction::DIRECTIONS direction;
+    std::string direction;
 public:
-   ~EventWindChange();
-   EventWindChange(long time, Direction::DIRECTIONS newDirection);
+   ~EventWindChange() {}
+   EventWindChange(long time,  std::string newDirection);
 
    EVENTTYPE getTypeEvent();
    std::string getEventToString();
 };
 
-#endif // EVENT_WIND_CHANGE_H
+#endif // INCLUDED_EVENT_WIND_CHANGE_H

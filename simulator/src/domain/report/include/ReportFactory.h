@@ -1,6 +1,6 @@
 #pragma once
-#ifndef REPORT_FACTORY_H
-#define REPORT_FACTORY_H
+#ifndef INCLUDED_REPORT_FACTORY_H
+#define INCLUDED_REPORT_FACTORY_H
 
 #include "ReportController.h"
 class Report;
@@ -14,4 +14,4 @@ public:
    Report* makeReport(REPORTTYPE type);
 };
 
-#endif
+#endif // INCLUDED_REPORT_FACTORY_H

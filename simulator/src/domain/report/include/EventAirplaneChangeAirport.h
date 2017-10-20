@@ -1,10 +1,9 @@
 #pragma once
 
-#ifndef EVENT_AIRPLANE_CHANGE_AIRPORT_H
-#define EVENT_AIRPLANE_CHANGE_AIRPORT_H
+#ifndef INCLUDED_EVENT_AIRPLANE_CHANGE_AIRPORT_H
+#define INCLUDED_EVENT_AIRPLANE_CHANGE_AIRPORT_H
 
 #include "event.h"
-#include <string>
 
 class EventAirplaneChangeAirport :
    public Event
@@ -12,11 +11,11 @@ class EventAirplaneChangeAirport :
 private:
    std::string airplaneName;
 public:
-   ~EventAirplaneChangeAirport();
+   ~EventAirplaneChangeAirport() {}
    EventAirplaneChangeAirport(long time, std::string _airplaneName);
 
    EVENTTYPE getTypeEvent();
    std::string getEventToString();
 };
 
-#endif // EVENT_AIRPLANE_CHANGE_AIRPORT_H
+#endif // INCLUDED_EVENT_AIRPLANE_CHANGE_AIRPORT_H
