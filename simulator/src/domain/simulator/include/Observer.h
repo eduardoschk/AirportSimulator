@@ -5,7 +5,7 @@
 
 class Observer {
 public:
-   virtual void updateTime(long time) = 0;
+   virtual void updateTime(const long time) = 0;
 };
 
 #endif // INCLUDED_OBSERVER_H

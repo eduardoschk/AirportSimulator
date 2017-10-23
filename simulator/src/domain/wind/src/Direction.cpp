@@ -24,5 +24,6 @@ std::string Direction::toString(DIRECTIONS direction) {
    case SOUTHWEST:   return "Sudoeste";
    case NORTHWEST:   return "Noroeste";
    case SOUTHEAST:   return "Sudeste";
+   default:          return "Erro em identificar vento";
    }
 }

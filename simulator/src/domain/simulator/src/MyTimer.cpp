@@ -15,7 +15,7 @@ MyTimer::~MyTimer()
 long MyTimer::getActualTime() 
 {
    time_t t;
-   return time(&t); 
+   return static_cast<long>(time(&t)); 
 }
 
 void MyTimer::sleep(const int seconds) 
@@ -81,17 +81,20 @@ time_t MyTimer::getInitialTimer()
 std::string MyTimer::getDateOnTimestamp(const time_t time) 
 {
    time_t initialTimer;
+   struct tm tm;
 
    if (instance->getInitialTimer() > 0) 
       initialTimer= instance->getInitialTimer();
    else 
       initialTimer= getActualTime();
 
-   time_t aux= initialTimer;
-   aux+= (time - initialTimer) * 240;
-   struct tm *tm = localtime(&aux);
+   time_t auxTimer = initialTimer;
+
+   auxTimer+= (time - initialTimer) * 240;
+   localtime_s(&tm, &auxTimer);
    char buffer[17];
-   strftime(buffer, 17, "%d/%m/%Y %H:%M", tm);
+   strftime(buffer, 17, "%d/%m/%Y %H:%M", &tm);
+
    return std::string(buffer);
 }
 

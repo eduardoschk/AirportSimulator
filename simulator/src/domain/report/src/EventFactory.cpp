@@ -17,6 +17,8 @@ EventFactory::EventFactory() : timer(MyTimer::getTimer()) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 
+// Return nullptr if event type are wrong
+
 Event* EventFactory::makeEvent(EVENTTYPE type, void* arg) 
 {
    switch(type) 
@@ -31,6 +33,7 @@ Event* EventFactory::makeEvent(EVENTTYPE type, void* arg)
    case EVENT_AIRPLANES_WAITING_MORE_THAN_FIVE:    return makeAirplanesWaitingMoreThanFive();
    case EVENT_CAPACITY_MORE_THAN_SEVENTY:          return makeCapacityMoreThanSeventy();
    case EVENT_REQUESTS_TAKE_OFF_MORE_THAN_FIVE:    return makeRequestsTakeOffMoreThanFive();
+   default:                                        return nullptr;
    }
 }
 

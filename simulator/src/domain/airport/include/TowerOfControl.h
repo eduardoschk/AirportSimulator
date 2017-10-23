@@ -27,8 +27,8 @@ private:
    bool resolveTakeOffRequest(TakeOffRequest& landingRequest);
    void requestResolved(Request& request);
 
-   void verifyCriticalSituationCapacity();
    void verifyCriticalSituationWaiting();
+   void verifyCriticalSituationCapacity();
    void verifyCriticalSituationTakeOffPending();
    
    TowerOfControl();

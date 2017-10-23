@@ -31,7 +31,7 @@ public:
 
    Direction::DIRECTIONS getDirectionRunWay();
    
-   void updateTime(long time);
+   void updateTime(const long time);
 };
 
 #endif //INCLUDED_RUNWAY_H

@@ -10,7 +10,7 @@ TowerOfControl::TowerOfControl() : airport(Airport::getInstance()), airplanesInL
 
 TowerOfControl::~TowerOfControl() 
 {
-   for (int i= 0 ; i < requests.size() ; i++)
+   for (size_t i= 0 ; i < requests.size() ; i++)
       delete requests[i];
    delete airport;
    instance= nullptr;
@@ -20,7 +20,7 @@ TowerOfControl::~TowerOfControl()
 
 void TowerOfControl::verifyAllRequests() 
 {
-   for (int i= 0; airport->airportIsAcessible() && i < requests.size(); ++i) 
+   for (size_t i= 0; airport->airportIsAcessible() && i < requests.size(); ++i) 
    {
       if (verifyRequest(*requests[i])) 
       {
@@ -39,6 +39,7 @@ bool TowerOfControl::verifyRequest(Request& request)
    {
       case Request::REQUEST_LANDING:  return resolveLandingRequest(dynamic_cast<LandingRequest&>(request));
       case Request::REQUEST_TAKEOFF:  return resolveTakeOffRequest(dynamic_cast<TakeOffRequest&>(request));
+      default:                        return false;
    }
 }
 
@@ -106,7 +107,7 @@ void TowerOfControl::changedAirport(Airplane* airplane)
 {
    log->registryEvent(EVENT_AIRPLANE_CHANGE_AIRPORT, &(airplane->getName()));
 
-   for (int i= 0 ; i < requests.size() ; ++i) 
+   for (size_t i= 0 ; i < requests.size() ; ++i) 
    {
       if (requests[i]->getAirplane() ==  airplane) 
       {

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "MyTimer.h"
 #include "RunWay.h"
-#include "Log.h";
+#include "Log.h"
 
 RunWay::RunWay(const Direction::DIRECTIONS _directionRunWay) : directionRunWay(_directionRunWay), runWayFree(true), log(Log::getInstance()) 
 {
@@ -42,7 +42,7 @@ Direction::DIRECTIONS RunWay::getDirectionRunWay()
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void RunWay::updateTime(long time) 
+void RunWay::updateTime(const long time) 
 {
    if (!runWayFree) 
    {

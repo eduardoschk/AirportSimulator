@@ -35,6 +35,7 @@ bool Airport::requestUseAirport(Airplane*)
       runWay->runwaySetToUse();
       return true;
    }
+   return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

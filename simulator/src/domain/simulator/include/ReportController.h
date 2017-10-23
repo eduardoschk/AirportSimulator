@@ -37,6 +37,7 @@ public:
    EventMonitoring getEvent();
    void newEvent(Event* event);
 
+   std::string getReportResult(REPORTTYPE type);
    Report* generateReport(REPORTTYPE type);
 }; 
 

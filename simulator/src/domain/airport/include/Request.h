@@ -29,8 +29,8 @@ public:
       airplane= _airplane;
    }
    
-   std::string getStringTypeRequest() { return "Pouso"; }
-   TYPEREQUEST getTypeRequest() { return TYPEREQUEST::REQUEST_LANDING; }
+   std::string getStringTypeRequest() { return "Pouso";         }
+   TYPEREQUEST getTypeRequest()       { return REQUEST_LANDING; }
 };
 
 class TakeOffRequest : 
@@ -45,8 +45,8 @@ public:
       airplane= _airplane;
    }
 
-   std::string getStringTypeRequest() { return "Decolagem"; }
-   TYPEREQUEST getTypeRequest() { return TYPEREQUEST::REQUEST_TAKEOFF; }
+   std::string getStringTypeRequest() { return "Decolagem";     }
+   TYPEREQUEST getTypeRequest()       { return REQUEST_TAKEOFF; }
 };
 
 #endif // INCLUDED_REQUEST_H

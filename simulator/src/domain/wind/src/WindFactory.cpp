@@ -1,10 +1,12 @@
-#include "WindFactory.h"
 #include "Wind.h"
+#include "WindFactory.h"
+
+// Return nullptr if degree are wrong value
 
 Wind* WindFactory::makeWindStatus(const double degreeWind) 
 {
    if (degreeWind < 0 || degreeWind > 360) 
-      throw DegreeWindException();
+      return nullptr;
 
    if (degreeWind >= 337.5 && degreeWind <= 360 || degreeWind <=22.5) 
       return new NorthWind();
@@ -29,6 +31,5 @@ Wind* WindFactory::makeWindStatus(const double degreeWind)
 
    if (degreeWind > 22.5 && degreeWind < 67.5) 
       return new NortheastWind();
-   
-   throw DegreeWindException();
+   return nullptr;
 }

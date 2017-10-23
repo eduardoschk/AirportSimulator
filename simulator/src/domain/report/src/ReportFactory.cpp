@@ -6,6 +6,8 @@
 #include "ReportAirplanesOnGround.h"
 #include "ReportCriticalSituation.h"
 
+// Return nullptr if report type are wrong
+
 Report* ReportFactory::makeReport(REPORTTYPE type) 
 {
    switch (type) 
@@ -16,5 +18,6 @@ Report* ReportFactory::makeReport(REPORTTYPE type)
    case REPORT_CRITICAL_SITUATION:   return new ReportCriticalSituation();
    case REPORT_PASSENGERS:           return new ReportPassengers();
    case REPORT_WIND:                 return new ReportWind();
+   default:                          return nullptr;
    }
 }

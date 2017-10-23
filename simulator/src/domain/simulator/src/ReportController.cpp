@@ -1,6 +1,7 @@
-#include "ReportController.h"
-#include "ReportFactory.h"
 #include "Log.h"
+#include "Report.h"
+#include "ReportFactory.h"
+#include "ReportController.h"
 
 ReportController::~ReportController() 
 {
@@ -35,7 +36,17 @@ void ReportController::newEvent(Event* evento)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-Report* ReportController::generateReport(REPORTTYPE type) 
+std::string ReportController::getReportResult(REPORTTYPE type)
+{
+   std::string result;
+   Report* report= generateReport(type);
+
+   result= report->generatingReport();
+   delete report;
+   return result;
+}
+
+Report* ReportController::generateReport(REPORTTYPE type)
 {
    return factory->makeReport(type);
 }

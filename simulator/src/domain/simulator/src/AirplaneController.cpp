@@ -8,7 +8,7 @@ int maxPassengers= 220;
 
 AirplaneController::~AirplaneController() 
 {
-   for (int i= 0 ; i < airplanes.size() ; i++)
+   for (size_t i= 0 ; i < airplanes.size() ; i++)
       delete airplanes[i];
    timer->removeObserver(this);
 }
@@ -39,7 +39,7 @@ void AirplaneController::calculateTimeNewAirplane()
 
 void AirplaneController::checkUpdateInAirplanesGenerated()
 {
-   for (int i= 0 ; i < airplanes.size() ; ++i)  
+   for (size_t i= 0 ; i < airplanes.size() ; ++i)  
    {
       if (checkAirplaneHasAlreadyLanded(*airplanes[i])) 
       {

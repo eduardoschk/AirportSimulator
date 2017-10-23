@@ -8,7 +8,7 @@ std::string generateManufacturers();
 
 long MyRandom::generateRandomValueBetween(int min, int max)
 {
-   srand( time(NULL) );
+   srand( static_cast<unsigned>(time(nullptr)) );
    return rand() % (max - min + 1) + min;
 }
 

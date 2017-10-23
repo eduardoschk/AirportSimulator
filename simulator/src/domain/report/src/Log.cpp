@@ -1,10 +1,10 @@
 #include "Log.h"
-#include "ReportController.h"
 #include "EventFactory.h"
+#include "ReportController.h"
 
 Log::~Log() {
    delete eventFactory;
-   for (int i= 0 ; i < events.size() ; ++i)
+   for (size_t i = 0 ; i < events.size() ; ++i)
       delete events[i];
    instance= nullptr;
    monitor= nullptr;
